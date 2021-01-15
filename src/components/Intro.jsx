@@ -5,6 +5,11 @@ import location from '../images/location.svg'
 import cellphone from '../images/cellphone.svg'
 
 export default class Intro extends Component {
+
+    componentDidMount() {
+        document.title = 'CV - Martina Amengual'
+    }
+
     state = {
         name: 'MARTINA',
         surname: 'AMENGUAL',
