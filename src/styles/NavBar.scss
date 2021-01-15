@@ -1,0 +1,21 @@
+.navbar-brand {
+  color: white !important;
+}
+
+.mtu-navbar {
+  background-color: #303030;
+}
+
+a.mtu-nav-btn {
+  text-decoration-thickness: 2px;
+  color: rgb(230, 230, 230) !important;
+  border-radius: 15px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+a.mtu-nav-btn:hover {
+  background: rgba(200, 200, 200, 0.15);
+}
