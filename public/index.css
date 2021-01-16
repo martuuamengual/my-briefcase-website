@@ -8,6 +8,7 @@ body {
   font-family: "Rubik" !important;
   font-weight: 600;
   padding-top: 57px;
+  background-color: black;
   /*background-color: rgb(240, 240, 240) !important;*/
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -19,6 +20,29 @@ code {
 }
 
 a {
-  text-decoration-thickness: 2px !important;
   color: #212529 !important;
+}
+
+a > span {
+  display: inline-block;
+  line-height: 0.85em;
+  padding-bottom: 0px;
+  text-decoration: none !important;
+}
+
+a:hover > span {
+  border-bottom-width: 2px !important;
+  border-bottom-style: solid;
+}
+
+a > strong {
+  display: inline-block;
+  line-height: 0.85em;
+  padding-bottom: 0px;
+  text-decoration: none !important;
+}
+
+a:hover > strong {
+  border-bottom-width: 2px !important;
+  border-bottom-style: solid;
 }
