@@ -2,7 +2,6 @@
 import React, { Component } from 'react'
 import '../styles/Intro.sass'
 import location from '../images/location.svg'
-import cellphone from '../images/cellphone.svg'
 
 export default class Intro extends Component {
 
@@ -13,8 +12,7 @@ export default class Intro extends Component {
     state = {
         name: 'MARTINA',
         surname: 'AMENGUAL',
-        location: 'Buenos aires, Argentina',
-        description: 'Hola, bienvenid@ me llamo martina, soy una mujer transexual y tengo actualmente 22 años. Aprendi a programar a los 8 años'
+        location: 'Buenos aires, Argentina'
     };
 
     render() {
@@ -35,10 +33,12 @@ export default class Intro extends Component {
                     <div className="col-lg">
                     </div>
                     <div className="col-lg-offset">
-                        <a href="https://goo.gl/maps/9FcCa95YWViybffL7" target="_blank" className="mtu-intro-icon">
+                        <a href="https://goo.gl/maps/9FcCa95YWViybffL7" target="_blank" className="mtu-intro-icon d-block">
                             <img src={location} alt="Location"></img>
                             <span>{this.state.location}</span>
                         </a>
+                        <span className="d-block mt-2">Web Developer</span>
+                        <span className="d-block mt-2">(Current-Job) Not-Employed</span>
                     </div>
                     <div className="col-lg">
                     </div>
@@ -47,7 +47,13 @@ export default class Intro extends Component {
                     <div className="col-lg"></div>
                     <div className="col-lg-offset" style={{ maxWidth: "70%" }}>
                         <div className="mtu-intro-description">
-                            {this.state.description}
+                            Hola, bienvenid@ me llamo martina tengo 22 años 
+                            y soy desarrolladora de sistemas informaticos. Aprendi a programar 
+                            a los 8 años en C++, programe calculadoras, sistemas de calculo matematico 
+                            sensillo, etc. En la secundaria me especialize en <strong>electronica</strong>, 
+                            ahi desarroye y programe algunos robots y obtuvimos el 4to puesto (ver imagen). 
+                            Actualmente me encuentro aprediendo nuevas tecnologias. Soy una persona 
+                            amable, calida y aplicada. Si quieres me puedes <a href="#"><strong>contactar</strong></a> 😊
                         </div>
                     </div>
                     <div className="col-lg"></div>
