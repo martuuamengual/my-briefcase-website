@@ -19,10 +19,10 @@ export default class NavBar extends Component {
                             <div className="container">
                                 <div className="row">
                                     <NavBarButton href="#" text='Intro'></NavBarButton>
-                                    <NavBarButton href="#" text='Info'></NavBarButton>
+                                    <NavBarButton href="#" text='Education'></NavBarButton>
                                     <NavBarButton href="#" text='Skills'></NavBarButton>
-                                    <NavBarButton href="#" text='Briefcase'></NavBarButton>
                                     <NavBarButton href="#" text='Hobbys'></NavBarButton>
+                                    <NavBarButton href="#" text='Briefcase'></NavBarButton>
                                     <NavBarButton className="mb-2 mb-md-0" href="#" text='Contact'></NavBarButton>
                                 </div>
                             </div>

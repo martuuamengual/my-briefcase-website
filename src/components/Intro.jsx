@@ -45,8 +45,8 @@ export default class Intro extends Component {
                         <div className="col-lg"></div>
                         <div className="col-lg-offset" style={{ maxWidth: "70%" }}>
                             <div className="mtu-intro-description">
-                                Hola, bienvenid@ me llamo martina tengo 22 años 
-                                y soy desarrolladora de sistemas informaticos. Aprendi a programar 
+                                Hola, bienvenid@ me llamo martin tengo 22 años 
+                                y soy desarrollador de sistemas informaticos. Aprendi a programar 
                                 a los 8 años en C++, programe calculadoras, sistemas de calculo matematico 
                                 sensillo, etc. En la secundaria me especialize en <strong>electronica</strong>,
                                 ahi desarroye y programe algunos robots y obtuvimos el 4to puesto <ModalImage 

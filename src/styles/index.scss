@@ -3,3 +3,9 @@
     font-size: #{$index}px;
   }
 }
+
+@for $index from 1 through 1000 {
+  .mt-#{ $index }px {
+    margin-top: #{$index}px;
+  }
+}

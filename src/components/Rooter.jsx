@@ -4,7 +4,7 @@ import {
     Route
 } from "react-router-dom";
 
-import App from "src/App";
+import Landing from "src/pages/Landing";
   
 export default function Rooter() {
     return (
@@ -17,7 +17,7 @@ export default function Rooter() {
                 <Users />
             </Route>
             <Route exact path="/">
-                <App />
+                <Landing />
             </Route>
             <Route path="*">
                 <NotMatch />
