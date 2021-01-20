@@ -15,22 +15,22 @@ export default class Intro extends Component {
     render() {
         return (
             <section>
-                <div className="container pt-lg-4">
+                <div className="container pt-xl-4">
                     <div className="row justify-content-center align-items-center text-center">
-                        <div className="col-lg">
+                        <div className="col-xl">
                             <span className="mtu-intro-name">{this.state.name}</span>
                         </div>
-                        <div className="col-lg-offset">
+                        <div className="col-xl-offset">
                             <div className="mtu-intro-foto shadow"></div>
                         </div>
-                        <div className="col-lg">
+                        <div className="col-xl">
                         <span className="mtu-intro-name">{this.state.surname}</span>
                         </div>
                     </div>
                     <div className="row mt-4 justify-content-center align-items-center text-center">
-                        <div className="col-lg">
+                        <div className="col-xl">
                         </div>
-                        <div className="col-lg-offset">
+                        <div className="col-xl-offset">
                             <a href="https://goo.gl/maps/9FcCa95YWViybffL7" target="_blank" className="mtu-intro-icon d-block">
                                 <img src={location} alt="Location"></img>
                                 <span>{this.state.location}</span>
@@ -38,26 +38,26 @@ export default class Intro extends Component {
                             <span className="d-block mt-2">Web Developer</span>
                             <span className="d-block mt-2">(Current-Job) Not-Employed</span>
                         </div>
-                        <div className="col-lg">
+                        <div className="col-xl">
                         </div>
                     </div>
                     <div className="row mt-4 justify-content-center align-items-center text-center">
-                        <div className="col-lg"></div>
-                        <div className="col-lg-offset" style={{ maxWidth: "70%" }}>
+                        <div className="col-xl"></div>
+                        <div className="col-xl-offset" style={{ maxWidth: "70%" }}>
                             <div className="mtu-intro-description">
-                                Hola, bienvenid@ me llamo martin tengo 22 años 
-                                y soy desarrollador de sistemas informaticos. Aprendi a programar 
-                                a los 8 años en C++, programe calculadoras, sistemas de calculo matematico 
-                                sensillo, etc. En la secundaria me especialize en <strong>electronica</strong>,
-                                ahi desarroye y programe algunos robots y obtuvimos el 4to puesto <ModalImage 
+                                Hola, bienvenid@ me llamo Martin tengo 22 años 
+                                y soy desarrollador de sistemas informáticos. Aprendí a programar 
+                                a los 8 años en C++, programé calculadoras, sistemas de cálculo matemático 
+                                sencillo, etc. En la secundaria me especialicé en <strong>electrónica</strong>,
+                                ahí desarrollé y programé algunos robots y obtuvimos el 4to puesto <ModalImage 
                                 id="asd1" id-btn="myImg1" text="(ver imagen)" 
                                 src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" 
                                 alt="Example text2"></ModalImage>. 
-                                Actualmente me encuentro aprediendo nuevas tecnologias. Soy una persona 
-                                amable, calida y aplicada. Si quieres me puedes <a href="#"><strong>contactar</strong></a> 😊
+                                Actualmente me encuentro aprendiendo nuevas tecnologías. Soy una persona 
+                                amable, cálida y aplicada. Si quieres me puedes <a href="#"><strong>contactar</strong></a> 😊
                             </div>
                         </div>
-                        <div className="col-lg"></div>
+                        <div className="col-xl"></div>
                     </div>
                 </div>
             </section>

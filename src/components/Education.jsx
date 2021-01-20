@@ -1,13 +1,57 @@
 import { Component } from "react";
-
+import 'src/styles/Education.sass'
+import university from 'src/images/university.svg'
 
 export default class Education extends Component {
     render() {
         return (
-            <section>
+            <section className="education">
                 <div className="container mt-120px">
-                    <div className="row justify-content-center align-items-center text-center">
-                        asd
+                    <div className="mtu-title">EDUCATION</div>
+                    <div className="row justify-content-center align-items-center mtu-education">
+                        <div className="col-xl">
+                            <div className="card" style={{ height: "214px" }}>
+                                <div className="card-body">
+                                    <h5 className="card-title mtu-education-title">2005-2010</h5>
+                                    <p className="card-text mtu-education-text">
+                                        <img src={university} alt="univerisity"/>
+                                        Inst. La Salle Florida, Buenos aires - Primaria
+                                    </p>
+                                    <p className="card-text">
+                                        Complete mis estudios primarios con un promedio de 7.2
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-xl mt-xl-0 mt-5">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h5 className="card-title mtu-education-title">2011-2017</h5>
+                                    <p className="card-text mtu-education-text">
+                                        <img src={university} alt="univerisity"/>
+                                        Inst. La Salle Florida, Buenos aires - Secundaria
+                                    </p>
+                                    <p className="card-text">
+                                        Complete mis estudios secundarios con especialidad en tecnico electronico con un promedio de 7.2
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-xl mt-xl-0 mt-5">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h5 className="card-title mtu-education-title">2018-2021</h5>
+                                    <p className="card-text mtu-education-text">
+                                        <img src={university} alt="univerisity"/>
+                                        Autodidacta
+                                    </p>
+                                    <p className="card-text">
+                                        En esta etapa de mi vida fui a algunas universidades, pero ninguna me termino
+                                        gustando asi que me dedique a <strong>trabajar</strong> y a <strong>aprender por mi cuenta</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

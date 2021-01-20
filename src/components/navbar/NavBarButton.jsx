@@ -5,7 +5,7 @@ export default class NavBarButton extends Component {
 
     
     state = {
-        className: 'col-md-auto mt-3 mt-md-0',
+        className: 'col-xl-auto mt-3 mt-xl-0',
         href: '#',
         text: 'NO_TEXT'
     }

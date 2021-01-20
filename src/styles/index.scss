@@ -9,3 +9,33 @@
     margin-top: #{$index}px;
   }
 }
+
+@for $index from 1 through 1000 {
+  .mb-#{ $index }px {
+    margin-bottom: #{$index}px;
+  }
+}
+
+@for $index from 1 through 1000 {
+  .p-#{ $index }px {
+    padding: #{$index}px #{$index}px #{$index}px #{$index}px;
+  }
+}
+
+@for $index from 1 through 1000 {
+  .pt-#{ $index }px {
+    padding-top: #{$index}px;
+  }
+}
+
+@for $index from 1 through 1000 {
+  .pb-#{ $index }px {
+    padding-bottom: #{$index}px;
+  }
+}
+
+@for $index from 1 through 1000 {
+  .pl-#{ $index }px {
+    padding-left: #{$index}px;
+  }
+}
