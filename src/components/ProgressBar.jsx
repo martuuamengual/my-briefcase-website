@@ -16,7 +16,7 @@ export default class ProgressBar extends Component {
         this.myRef = React.createRef()
         if (!isNaN(parseInt(this.props.value, 10))) {
             let value = parseInt(this.props.value, 10);
-            if ((this.state.minPercentage <= value) && (value < this.state.maxPercentage)) {
+            if ((this.state.minPercentage <= value) && (value <= this.state.maxPercentage)) {
                 this.state.percentage = value;
             }
         }

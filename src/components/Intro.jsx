@@ -36,6 +36,7 @@ export default class Intro extends Component {
                                 <span>{this.state.location}</span>
                             </a>
                             <span className="d-block mt-2">Web Developer</span>
+                            <span className="d-block mt-2">Semi-Senior/Senior</span>
                             <span className="d-block mt-2">(Current-Job) Not-Employed</span>
                         </div>
                         <div className="col-xl">
@@ -54,7 +55,7 @@ export default class Intro extends Component {
                                 src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" 
                                 alt="Example text2"></ModalImage>. 
                                 Actualmente me encuentro aprendiendo nuevas tecnologías. Soy una persona 
-                                amable, cálida y aplicada. Si quieres me puedes <a href="#"><strong>contactar</strong></a> 😊
+                                amable, cálida, aplicada y con muchas ganas de seguir aprendiendo. Si quieres me puedes <a href="#"><strong>contactar</strong></a> 😊
                             </div>
                         </div>
                         <div className="col-xl"></div>
