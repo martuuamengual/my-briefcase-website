@@ -35,7 +35,7 @@ export default class Intro extends Component {
                                 <img src={location} alt="Location"></img>
                                 <span>{this.state.location}</span>
                             </a>
-                            <span className="d-block mt-2">Web Developer</span>
+                            <span className="d-block mt-2">Fullstack Developer</span>
                             <span className="d-block mt-2">Semi-Senior/Senior</span>
                             <span className="d-block mt-2">(Current-Job) Not-Employed</span>
                         </div>
@@ -50,11 +50,12 @@ export default class Intro extends Component {
                                 y soy desarrollador de sistemas informáticos. Aprendí a programar 
                                 a los 8 años en C++, programé calculadoras, sistemas de cálculo matemático 
                                 sencillo, etc. En la secundaria me especialicé en <strong>electrónica</strong>,
-                                ahí desarrollé y programé algunos robots y obtuvimos el 4to puesto <ModalImage 
+                                ahí desarrollé y programé algunos robots y obtuvimos el 4to puesto
+                                en <strong>laberinto</strong> en la <strong>liga nacional de robotica</strong> <ModalImage 
                                 id="asd1" id-btn="myImg1" text="(ver imagen)" 
                                 src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" 
                                 alt="Example text2"></ModalImage>. 
-                                Actualmente me encuentro aprendiendo nuevas tecnologías. Soy una persona 
+                                Actualmente me encuentro aprendiendo nuevas tecnologías. Me considero una persona 
                                 amable, cálida, aplicada y con muchas ganas de seguir aprendiendo. Si quieres me puedes <a href="#"><strong>contactar</strong></a> 😊
                             </div>
                         </div>

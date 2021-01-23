@@ -66,7 +66,7 @@ export default class Skills extends Component {
                     </div>
                     <div className="row justify-content-center align-items-center mt-5">
                         <div className="col-xl">
-                            <ProgressBar value="70" text="Html"></ProgressBar>
+                            <ProgressBar value="90" text="Html"></ProgressBar>
                         </div>
                         <div className="col-xl mt-xl-0 mt-5">
                             <ProgressBar value="70" text="Css"></ProgressBar>

@@ -17,7 +17,7 @@ export default class Education extends Component {
                                         Inst. La Salle Florida, Buenos aires - Primaria
                                     </p>
                                     <p className="card-text">
-                                        Complete mis estudios primarios con un promedio de 7.2
+                                        Complete mis estudios primarios con un promedio de 7.5
                                     </p>
                                 </div>
                             </div>
@@ -31,7 +31,7 @@ export default class Education extends Component {
                                         Inst. La Salle Florida, Buenos aires - Secundaria
                                     </p>
                                     <p className="card-text">
-                                        Complete mis estudios secundarios con especialidad en tecnico electronico con un promedio de 7.2
+                                        Complete mis estudios secundarios con especialidad en tecnico electronico con un promedio de 7.02
                                     </p>
                                 </div>
                             </div>

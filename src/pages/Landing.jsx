@@ -7,6 +7,7 @@ import Footer from 'src/components/Footer';
 import Intro from 'src/components/Intro';
 import NavBar from 'src/components/navbar/NavBar';
 import Experience from "src/components/Experience";
+import LanguageButton from "src/components/LanguageButton";
 
 export default class Landing extends Component {
     componentDidMount() {
