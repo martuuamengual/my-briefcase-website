@@ -5,6 +5,41 @@ import NavBarButton from './NavBarButton';
 
 export default class NavBar extends Component {
 
+    handleIntro = (event) => {
+        event.preventDefault();
+        console.log('asdss')
+    }
+
+    handleEducation = (event) => {
+        event.preventDefault();
+        console.log('asdss')
+    }
+
+    handleExperience = (event) => {
+        event.preventDefault();
+        console.log('asdss')
+    }
+
+    handleSkills = (event) => {
+        event.preventDefault();
+        console.log('asdss')
+    }
+
+    handleHobbys = (event) => {
+        event.preventDefault();
+        console.log('asdss')
+    }
+
+    handleBriefcase = (event) => {
+        event.preventDefault();
+        console.log('asdss')
+    }
+
+    handleContact = (event) => {
+        event.preventDefault();
+        console.log('asdss')
+    }
+
     render() {
         return (
             <nav className="navbar fixed-top navbar-expand-xl navbar-light mtu-navbar">
@@ -18,13 +53,13 @@ export default class NavBar extends Component {
                         <div className="d-flex">
                             <div className="container">
                                 <div className="row">
-                                    <NavBarButton href="#" text='Intro'></NavBarButton>
-                                    <NavBarButton href="#" text='Education'></NavBarButton>
-                                    <NavBarButton href="#" text='Experience'></NavBarButton>
-                                    <NavBarButton href="#" text='Skills'></NavBarButton>
-                                    <NavBarButton href="#" text='Hobbys'></NavBarButton>
-                                    <NavBarButton href="#" text='Briefcase'></NavBarButton>
-                                    <NavBarButton className="mb-2 mb-md-0" href="#" text='Contact'></NavBarButton>
+                                    <NavBarButton onClick={this.handleIntro} href="#" text='Intro'></NavBarButton>
+                                    <NavBarButton onClick={this.handleEducation} href="#" text='Education'></NavBarButton>
+                                    <NavBarButton onClick={this.handleExperience} href="#" text='Experience'></NavBarButton>
+                                    <NavBarButton onClick={this.handleSkills} href="#" text='Skills'></NavBarButton>
+                                    <NavBarButton onClick={this.handleHobbys} href="#" text='Hobbys'></NavBarButton>
+                                    <NavBarButton onClick={this.handleBriefcase} href="#" text='Briefcase'></NavBarButton>
+                                    <NavBarButton onClick={this.handleContact} className="mb-2 mb-md-0" href="#" text='Contact'></NavBarButton>
                                 </div>
                             </div>
                         </div>

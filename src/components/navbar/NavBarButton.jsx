@@ -26,7 +26,7 @@ export default class NavBarButton extends Component {
     render() {
         return (
             <div className={this.state.className}>
-                <a href={this.state.href} className="mtu-nav-btn">
+                <a onClick={this.props.onClick} href={this.state.href} className="mtu-nav-btn">
                     <span>{this.state.text}</span>
                 </a>
             </div>

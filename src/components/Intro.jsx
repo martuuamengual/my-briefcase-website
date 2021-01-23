@@ -14,7 +14,7 @@ export default class Intro extends Component {
 
     render() {
         return (
-            <section>
+            <section className="intro">
                 <div className="container pt-xl-4">
                     <div className="row justify-content-center align-items-center text-center">
                         <div className="col-xl">

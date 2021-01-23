@@ -4,7 +4,7 @@ import briefcase from 'src/images/briefcase.svg'
 export default class Experience extends Component {
     render() {
         return (
-            <section>
+            <section className="experience">
                 <div className="container mt-120px">
                     <div className="mtu-title">EXPERIENCE</div>
                     <div className="row justify-content-center align-items-center">
@@ -16,13 +16,13 @@ export default class Experience extends Component {
                                         <img src={briefcase} alt="briefcase"/>
                                         Inst. La Salle Florida, Buenos aires
                                     </p>
-                                    <p className="card-text">
+                                    <div className="card-text">
                                         Lenguajes que aprendí:
                                         <ul>
                                             <li>Assembler</li>
                                             <li>C++</li>
                                         </ul>
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@ export default class Experience extends Component {
                                         <img src={briefcase} alt="briefcase"/>
                                         Docturno, Buenos aires - <a href="http://docturno.com" target="_blank"><span>(Visit)</span></a>
                                     </p>
-                                    <p className="card-text">
+                                    <div className="card-text">
                                         <ul>
                                             <li>Mas de 3 años en la empresa</li>
                                         </ul>
@@ -47,7 +47,7 @@ export default class Experience extends Component {
                                             <li>Procesos de revisión de código (Pull requests)</li>
                                             <li>Programación de API REST en Java</li>
                                         </ul>
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -59,7 +59,7 @@ export default class Experience extends Component {
                                         <img src={briefcase} alt="briefcase"/>
                                         Autodidacta
                                     </p>
-                                    <p className="card-text">
+                                    <div className="card-text">
                                         Algunos de los lenguajes que aprendi son:
                                         <ul>
                                             <li>React</li>
@@ -71,7 +71,7 @@ export default class Experience extends Component {
                                             <li>HTML</li>
                                             <li>CSS</li>
                                         </ul>
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
