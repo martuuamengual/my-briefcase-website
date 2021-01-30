@@ -7,9 +7,10 @@ import Footer from 'src/components/Footer';
 import Intro from 'src/components/Intro';
 import NavBar from 'src/components/navbar/NavBar';
 import Experience from "src/components/Experience";
-import LanguageButton from "src/components/LanguageButton";
+import Hobbies from "src/components/Hobbies";
 
 export default class Landing extends Component {
+
     componentDidMount() {
         document.title = 'CV - Martin Amengual'
     }
@@ -17,12 +18,13 @@ export default class Landing extends Component {
     render() {
         return(
             <section>
-                <NavBar></NavBar>
-                <Intro></Intro>
-                <Education></Education>
-                <Experience></Experience>
-                <Skills></Skills>
-                <Footer></Footer>
+                <NavBar lang={this.props.lang}></NavBar>
+                <Intro lang={this.props.lang}></Intro>
+                <Education lang={this.props.lang}></Education>
+                <Experience lang={this.props.lang}></Experience>
+                <Skills lang={this.props.lang}></Skills>
+                <Hobbies lang={this.props.lang}></Hobbies>
+                <Footer lang={this.props.lang}></Footer>
             </section>
         );
     }

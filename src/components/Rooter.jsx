@@ -17,7 +17,13 @@ export default function Rooter() {
                 <Users />
             </Route>
             <Route exact path="/">
-                <Landing />
+                <Landing lang='en' />
+            </Route>
+            <Route exact path="/es">
+                <Landing lang='es' />
+            </Route>
+            <Route exact path="/en">
+                <Landing lang='en' />
             </Route>
             <Route path="*">
                 <NotMatch />
