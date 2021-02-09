@@ -1,5 +1,6 @@
 import { Component } from "react";
 import briefcase from 'src/images/briefcase.svg'
+import LanguageUtils from "src/utils/LanguageUtils";
 
 export default class Experience extends Component {
 
@@ -7,36 +8,26 @@ export default class Experience extends Component {
         lang: this.props.lang
     }
 
-    languages = {
-        'en': {
-            'title': 'EXPERIENCE'
+    content = {
+        en: {
+            title: 'EXPERIENCE',
+            firstCard: {
+                description: 'Languages ​​I learned'
+            },
+            thirdCard: {
+                title: 'Autodidact',
+                description: 'Some of the languages ​​I learned are'  
+            }
         },
-        'es': {
-            'title': 'EXPERIENCIA'
-        }
-    }
-
-    getFirstCardDescription() {
-        if (this.state.lang === 'es') {
-            return (
-                <span>
-                    Lenguajes que aprendí:
-                    <ul>
-                        <li>Assembler</li>
-                        <li>C++</li>
-                    </ul>
-                </span>
-            );
-        } else {
-            return (
-                <span>
-                    Languages ​​I learned:
-                    <ul>
-                        <li>Assembler</li>
-                        <li>C++</li>
-                    </ul>
-                </span>
-            );
+        es: {
+            title: 'EXPERIENCIA',
+            firstCard: {
+                description: 'Lenguajes que aprendí'
+            },
+            thirdCard: {
+                title: 'Autodidacta',
+                description: 'Algunos de los lenguajes que aprendi son'  
+            }
         }
     }
 
@@ -78,47 +69,12 @@ export default class Experience extends Component {
         }
     }
 
-    getTertiaryCardDescription() {
-        if (this.state.lang === 'es') {
-            return(
-                <span>
-                    Algunos de los lenguajes que aprendi son:
-                    <ul>
-                        <li>React</li>
-                        <li>Angular</li>
-                        <li>Python</li>
-                        <li>Javascript</li>
-                        <li>TypeScript</li>
-                        <li>C#</li>
-                        <li>HTML</li>
-                        <li>CSS</li>
-                    </ul>
-                </span>
-            );
-        } else {
-            return(
-                <span>
-                    Some of the languages ​​I learned are:
-                    <ul>
-                        <li>React</li>
-                        <li>Angular</li>
-                        <li>Python</li>
-                        <li>Javascript</li>
-                        <li>TypeScript</li>
-                        <li>C#</li>
-                        <li>HTML</li>
-                        <li>CSS</li>
-                    </ul>
-                </span>
-            );
-        }
-    }
-
     render() {
+        let content = LanguageUtils.getContent(this.state.lang, this.content);
         return (
             <section className="experience">
                 <div className="container mt-120px">
-                    <div className="mtu-title">{this.languages[this.state.lang]['title']}</div>
+                    <div className="mtu-title">{content.title}</div>
                     <div className="row justify-content-center align-items-center">
                         <div className="col-xl">
                             <div className="card" style={{ height: '375px' }}>
@@ -129,7 +85,11 @@ export default class Experience extends Component {
                                         Inst. La Salle Florida, Buenos aires
                                     </p>
                                     <div className="card-text">
-                                        {this.getFirstCardDescription()}
+                                        {content.firstCard.description}:
+                                        <ul>
+                                            <li>Assembler</li>
+                                            <li>C++</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -154,10 +114,20 @@ export default class Experience extends Component {
                                     <h5 className="card-title mtu-card-title">2017-2021</h5>
                                     <p className="card-text mtu-card-text">
                                         <img src={briefcase} alt="briefcase"/>
-                                        Autodidacta
+                                        {content.thirdCard.title}
                                     </p>
                                     <div className="card-text">
-                                        {this.getTertiaryCardDescription()}
+                                        {content.thirdCard.description}:
+                                        <ul>
+                                            <li>React</li>
+                                            <li>Angular</li>
+                                            <li>Python</li>
+                                            <li>Javascript</li>
+                                            <li>TypeScript</li>
+                                            <li>C#</li>
+                                            <li>HTML</li>
+                                            <li>CSS</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
 import reportWebVitals from './reportWebVitals';
-import Rooter from './components/Rooter';
+import Rooter from './pages/Rooter';
 
 
 ReactDOM.render(

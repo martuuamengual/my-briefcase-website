@@ -1,5 +1,6 @@
 
 import { Component } from 'react'
+import LanguageUtils from 'src/utils/LanguageUtils';
 import '../../styles/NavBar.sass'
 import NavBarButton from './NavBarButton';
 
@@ -9,22 +10,22 @@ export default class NavBar extends Component {
         lang: this.props.lang
     }
     
-    language = {
-        'es': {
-            'education': 'Educacion',
-            'experience': 'Experiencia',
-            'skills': 'Habilidades',
-            'hobbies': 'Hobbies',
-            'briefcase': 'Portafolio',
-            'contact': 'Contacto'
+    content = {
+        es: {
+            education: 'Educacion',
+            experience: 'Experiencia',
+            skills: 'Habilidades',
+            hobbies: 'Hobbies',
+            briefcase: 'Portafolio',
+            contact: 'Contacto'
         },
-        'en': {
-            'education': 'Education',
-            'experience': 'Experience',
-            'skills': 'Skills',
-            'hobbies': 'Hobbies',
-            'briefcase': 'Briefcase',
-            'contact': 'Contact'
+        en: {
+            education: 'Education',
+            experience: 'Experience',
+            skills: 'Skills',
+            hobbies: 'Hobbies',
+            briefcase: 'Briefcase',
+            contact: 'Contact'
         }
     }
 
@@ -71,6 +72,7 @@ export default class NavBar extends Component {
     }
 
     render() {
+        let content = LanguageUtils.getContent(this.state.lang, this.content);
         return (
             <nav className="navbar fixed-top navbar-expand-xl navbar-light mtu-navbar">
                 <div className="container-fluid">
@@ -84,12 +86,12 @@ export default class NavBar extends Component {
                             <div className="container">
                                 <div className="row">
                                     <NavBarButton onClick={this.handleIntro} href="#" text='Intro'></NavBarButton>
-                                    <NavBarButton onClick={this.handleEducation} href="#" text={this.language[this.state.lang]['education']}></NavBarButton>
-                                    <NavBarButton onClick={this.handleExperience} href="#" text={this.language[this.state.lang]['experience']}></NavBarButton>
-                                    <NavBarButton onClick={this.handleSkills} href="#" text={this.language[this.state.lang]['skills']}></NavBarButton>
-                                    <NavBarButton onClick={this.handleHobbys} href="#" text={this.language[this.state.lang]['hobbies']}></NavBarButton>
-                                    <NavBarButton onClick={this.handleBriefcase} href="#" text={this.language[this.state.lang]['briefcase']}></NavBarButton>
-                                    <NavBarButton onClick={this.handleContact} className="mb-2 mb-md-0" href="#" text={this.language[this.state.lang]['contact']}></NavBarButton>
+                                    <NavBarButton onClick={this.handleEducation} href="#" text={content.education}></NavBarButton>
+                                    <NavBarButton onClick={this.handleExperience} href="#" text={content.experience}></NavBarButton>
+                                    <NavBarButton onClick={this.handleSkills} href="#" text={content.skills}></NavBarButton>
+                                    <NavBarButton onClick={this.handleHobbys} href="#" text={content.hobbies}></NavBarButton>
+                                    <NavBarButton onClick={this.handleBriefcase} href="#" text={content.briefcase}></NavBarButton>
+                                    <NavBarButton onClick={this.handleContact} className="mb-2 mb-md-0" href="#" text={content.contact}></NavBarButton>
                                 </div>
                             </div>
                         </div>

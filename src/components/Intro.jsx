@@ -16,7 +16,7 @@ export default class Intro extends Component {
     getDescription() {
         if (this.state.lang === 'es') {
             return (
-                <div className="mtu-intro-description">
+                <span>
                     Hola, bienvenid@ me llamo Martin tengo 22 años 
                     y soy desarrollador de sistemas informáticos. Aprendí a programar 
                     a los 8 años en C++, programé calculadoras, sistemas de cálculo matemático 
@@ -28,11 +28,11 @@ export default class Intro extends Component {
                     alt="Example text2"></ModalImage>. 
                     Actualmente me encuentro aprendiendo nuevas tecnologías. Me considero una persona 
                     amable, cálida, aplicada y con muchas ganas de seguir aprendiendo. Si quieres me puedes <a href="#"><strong>contactar</strong></a> 😊
-                </div>
+                </span>
             );
         } else {
             return (
-                <div className="mtu-intro-description">
+                <span>
                     Hi, welcome my name is Martin I am 22 years old and I am a computer systems developer. 
                     I learned to program at the age of 8 in C++, I programmed calculators, simple mathematical calculation systems, 
                     etc. In high school I specialized in <strong>electronics</strong>, there I developed and programmed 
@@ -41,7 +41,7 @@ export default class Intro extends Component {
                     src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" 
                     alt="Example text2"></ModalImage>. 
                     I am currently learning new technologies. I consider myself a kind, warm, applied person and eager to continue learning. If you want you can <a href="#"><strong>contact me</strong></a> 😊
-                </div>
+                </span>
             );
         }
     }
@@ -79,7 +79,9 @@ export default class Intro extends Component {
                     <div className="row mt-4 justify-content-center align-items-center text-center">
                         <div className="col-xl"></div>
                         <div className="col-xl-offset" style={{ maxWidth: "70%" }}>
-                            {this.getDescription()}
+                            <div className="mtu-intro-description">
+                                {this.getDescription()}
+                            </div>
                         </div>
                         <div className="col-xl"></div>
                     </div>

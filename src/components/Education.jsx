@@ -1,5 +1,7 @@
 import { Component } from "react";
-import university from 'src/images/university.svg'
+import university from 'src/images/university.svg';
+import ReactHtmlParser from 'react-html-parser';
+import LanguageUtils from 'src/utils/LanguageUtils';
 
 export default class Education extends Component {
 
@@ -7,59 +9,46 @@ export default class Education extends Component {
         lang: this.props.lang
     }
 
-    language = {
-        'es': {
-            'title': 'EDUCACION',
-            'primary': {
-                'title-description': 'Primaria',
-                'description': 'Complete mis estudios primarios con un promedio de 7.5'
+    content = {
+        es: {
+            title: 'EDUCACION',
+            primary: {
+                title_description: 'Primaria',
+                description: 'Complete mis estudios primarios con un promedio de 7.5'
             },
-            'secondary': {
-                'title-description': 'Secundaria',
-                'description': 'Complete mis estudios secundarios con especialidad en tecnico electronico con un promedio de 7.02'
+            secondary: {
+                title_description: 'Secundaria',
+                description: 'Complete mis estudios secundarios con especialidad en tecnico electronico con un promedio de 7.02'
             },
-            'tertiary': {
-                'title-description': 'Autodidacta'
+            tertiary: {
+                title_description: 'Autodidacta',
+                description: 'En esta etapa de mi vida fui a algunas universidades, pero ninguna me termino gustando asi que me dedique a <strong>trabajar</strong> y a <strong>seguir aprendiendo por mi cuenta</strong>'
             }
         },
-        'en': {
-            'title': 'EDUCATION',
-            'primary': {
-                'title-description': 'Elementary School',
-                'description': 'I completed my primary studies with a 7.5 GPA'
+        en: {
+            title: 'EDUCATION',
+            primary: {
+                title_description: 'Elementary School',
+                description: 'I completed my primary studies with a 7.5 GPA'
             },
-            'secondary': {
-                'title-description': 'Middle School',
-                'description': 'I completed my secondary studies with a specialty in electronic technician with an average of 7.02'
+            secondary: {
+                title_description: 'Middle School',
+                description: 'I completed my secondary studies with a specialty in electronic technician with an average of 7.02'
             },
-            'tertiary': {
-                'title-description': 'Autodidact'
+            tertiary: {
+                title_description: 'Autodidact',
+                description: 'At this stage of my life I went to some universities, but I ended up liking none so I dedicated myself to <strong>working</strong> and <strong>continuing to learn on my own</strong>'
             }
         }
     }
-
-    getTertiaryDescription() {
-        if (this.state.lang === 'es') {
-            return(
-                <span>
-                    En esta etapa de mi vida fui a algunas universidades, pero ninguna me termino
-                    gustando asi que me dedique a <strong>trabajar</strong> y a <strong>seguir aprendiendo por mi cuenta</strong>
-                </span>
-            );
-        } else {
-            return(
-                <span>
-                    At this stage of my life I went to some universities, but I ended up liking none so I dedicated myself to <strong>working</strong> and <strong>continuing to learn on my own</strong>
-                </span>
-            );
-        }
-    }
+    
 
     render() {
+        let content = LanguageUtils.getContent(this.state.lang, this.content);
         return (
             <section className="education">
                 <div className="container mt-120px">
-                    <div className="mtu-title">{this.language[this.state.lang]['title']}</div>
+                    <div className="mtu-title">{content.title}</div>
                     <div className="row justify-content-center align-items-center mtu-education">
                         <div className="col-xl">
                             <div className="card" style={{ height: "214px" }}>
@@ -67,10 +56,10 @@ export default class Education extends Component {
                                     <h5 className="card-title mtu-card-title">2005-2010</h5>
                                     <p className="card-text mtu-card-text">
                                         <img src={university} alt="univerisity"/>
-                                        Inst. La Salle Florida, Buenos aires - {this.language[this.state.lang]['primary']['title-description']}
+                                        Inst. La Salle Florida, Buenos aires - {content.primary.title_description}
                                     </p>
                                     <p className="card-text">
-                                        {this.language[this.state.lang]['primary']['description']}
+                                        {content.primary.description}
                                     </p>
                                 </div>
                             </div>
@@ -81,10 +70,10 @@ export default class Education extends Component {
                                     <h5 className="card-title mtu-card-title">2011-2017</h5>
                                     <p className="card-text mtu-card-text">
                                         <img src={university} alt="univerisity"/>
-                                        Inst. La Salle Florida, Buenos aires - {this.language[this.state.lang]['secondary']['title-description']}
+                                        Inst. La Salle Florida, Buenos aires - {content.secondary.title_description}
                                     </p>
                                     <p className="card-text">
-                                        {this.language[this.state.lang]['secondary']['description']}
+                                        {content.secondary.description}
                                     </p>
                                 </div>
                             </div>
@@ -95,10 +84,10 @@ export default class Education extends Component {
                                     <h5 className="card-title mtu-card-title">2017-2021</h5>
                                     <p className="card-text mtu-card-text">
                                         <img src={university} alt="univerisity"/>
-                                        {this.language[this.state.lang]['tertiary']['title-description']}
+                                        {content.tertiary.title_description}
                                     </p>
                                     <p className="card-text">
-                                        {this.getTertiaryDescription()}
+                                        {ReactHtmlParser(content.tertiary.description)}
                                     </p>
                                 </div>
                             </div>
