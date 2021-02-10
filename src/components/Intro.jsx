@@ -18,9 +18,7 @@ export default class Intro extends Component {
             return (
                 <span>
                     Hola, bienvenid@ me llamo Martin tengo 22 años 
-                    y soy desarrollador de sistemas informáticos. Aprendí a programar 
-                    a los 8 años en C++, programé calculadoras, sistemas de cálculo matemático 
-                    sencillo, etc. En la secundaria me especialicé en <strong>electrónica</strong>,
+                    y soy desarrollador de sistemas informáticos. En la secundaria me especialicé en <strong>electrónica</strong>,
                     ahí desarrollé y programé algunos robots y obtuvimos el 4to puesto
                     en <strong>laberinto</strong> en la <strong>liga nacional de robotica</strong> <ModalImage 
                     id="modal-myImg" id-btn="myImg1" text="(ver imagen)" 
@@ -33,9 +31,8 @@ export default class Intro extends Component {
         } else {
             return (
                 <span>
-                    Hi, welcome my name is Martin I am 22 years old and I am a computer systems developer. 
-                    I learned to program at the age of 8 in C++, I programmed calculators, simple mathematical calculation systems, 
-                    etc. In high school I specialized in <strong>electronics</strong>, there I developed and programmed 
+                    Hi, welcome my name is Martin I am 22 years old and I am a computer systems developer. In 
+                    high school I specialized in <strong>electronics</strong>, there I developed and programmed 
                     some robots and we obtained the 4th place in <strong>labyrinth</strong> in the <strong>national league of robotics</strong> <ModalImage 
                     id="modal-myImg" id-btn="myImg1" text="(see image)" 
                     src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" 
