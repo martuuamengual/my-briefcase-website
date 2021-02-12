@@ -9,6 +9,8 @@ import NavBar from 'src/components/navbar/NavBar';
 import Experience from "src/components/Experience";
 import Hobbies from "src/components/Hobbies";
 import Briefcase from "src/components/Briefcase";
+import Calification from "src/components/Calification";
+import Contact from "src/components/Contact";
 
 export default class Landing extends Component {
 
@@ -26,6 +28,8 @@ export default class Landing extends Component {
                 <Skills lang={this.props.lang}></Skills>
                 <Hobbies lang={this.props.lang}></Hobbies>
                 <Briefcase lang={this.props.lang}></Briefcase>
+                <Calification lang={this.props.lang}></Calification>
+                <Contact lang={this.props.lang}></Contact>
                 <Footer lang={this.props.lang}></Footer>
             </section>
         );

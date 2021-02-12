@@ -39,3 +39,8 @@
     padding-left: #{$index}px;
   }
 }
+
+.form-control:focus {
+  border-color: rgba(183, 110, 212, 0.8);
+  box-shadow: 0 0 0 0.2rem rgba(183, 110, 212, 0.25);
+}

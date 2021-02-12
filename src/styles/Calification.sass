@@ -1,0 +1,27 @@
+@import _colors
+
+.calification
+    .mtu-row
+        background-color: rgb(245,245,245)
+        .col-xl + .col-xl
+            padding: 2rem
+
+    .rating-container
+        div + span
+            display: block
+            padding-top: 1.5rem
+            color: rgb(180,180,180)
+
+    .rating
+        padding-top: 1.5rem
+        .checked
+            color: #fafa89
+        unicode-bidi: bidi-override
+        direction: rtl
+        span
+            color: rgb(150,150,150)
+            cursor: pointer
+            padding-left: 5px
+            font-size: 3rem
+        span:hover:before, span:hover ~ span:before
+            color: #fafa89

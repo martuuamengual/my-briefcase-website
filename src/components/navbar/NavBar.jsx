@@ -3,6 +3,7 @@ import { Component } from 'react'
 import LanguageUtils from 'src/utils/LanguageUtils';
 import '../../styles/NavBar.sass'
 import NavBarButton from './NavBarButton';
+import $ from 'jquery';
 
 export default class NavBar extends Component {
 
@@ -67,8 +68,22 @@ export default class NavBar extends Component {
 
     handleContact = (event) => {
         event.preventDefault();
-        let contact = document.getElementsByClassName('contact')[0];
-        contact.scrollIntoView({behavior: 'smooth'});
+
+        let calification = $('.calification');
+
+        if (calification.is(":visible")) {
+            var headerOffset = 45;
+            var elementPosition = calification.get(0).getBoundingClientRect().top;
+            var offsetPosition = elementPosition - headerOffset;
+    
+            window.scrollBy({
+                top: offsetPosition,
+                behavior: 'smooth'
+            })
+        } else {
+            let contact = document.getElementsByClassName('contact')[0];
+            contact.scrollIntoView({behavior: 'smooth'});
+        }
     }
 
     render() {
