@@ -1,6 +1,10 @@
 import { Component } from "react";
 import LanguageUtils from "src/utils/LanguageUtils";
 
+var API_KEY = 'key-134a299a885829bcc9aed4341297e213';
+var DOMAIN = 'sandboxec409549fbf347c09e765fff1c403d86.mailgun.org';
+var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
+
 
 export default class Contact extends Component {
 
@@ -27,6 +31,21 @@ export default class Contact extends Component {
         }
     }
 
+    handleSubmit = (event) => {
+        event.preventDefault();
+        console.log('sending')
+        const data = {
+            from: 'Martina <martina@gmail.com>',
+            to: 'martuu.amengual@gmail.com',
+            subject: 'Hello',
+            text: 'Testing some Mailgun awesomeness!'
+        };
+        
+        mailgun.messages().send(data, (error, body) => {
+            console.log(body);
+        });
+    }
+
     render() {
         let content = LanguageUtils.getContent(this.props.lang, this.content);
         return(
@@ -36,7 +55,7 @@ export default class Contact extends Component {
                     <div className="row">
                         <div className="col-xl-3"></div>
                         <div className="col-xl-6">
-                            <form>
+                            <form onSubmit={this.handleSubmit}>
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input type="text" class="form-control" id="name" placeholder="John Feneck" />
@@ -49,6 +68,7 @@ export default class Contact extends Component {
                                     <label for="message">Message</label>
                                     <textarea class="form-control" id="message" rows="5"></textarea>
                                 </div>
+                                <button type="submit">asdasd</button>
                             </form>
                         </div>
                         <div className="col-xl-3"></div>
