@@ -1,20 +1,20 @@
 import { Component } from "react";
-import 'src/styles/index.scss';
-import 'src/styles/Landing.sass';
-import Education from 'src/components/Education';
-import Skills from 'src/components/Skills';
-import Footer from 'src/components/Footer';
-import Intro from 'src/components/Intro';
-import NavBar from 'src/components/navbar/NavBar';
-import Experience from "src/components/Experience";
-import Hobbies from "src/components/Hobbies";
-import Briefcase from "src/components/Briefcase";
-import Calification from "src/components/Calification";
-import Contact from "src/components/Contact";
+import 'Styles/index.scss';
+import 'Styles/Landing.sass';
+import Education from 'Components/Education';
+import Skills from 'Components/Skills';
+import Footer from 'Components/Footer';
+import Intro from 'Components/Intro';
+import NavBar from 'Components/navbar/NavBar';
+import Experience from "Components/Experience";
+import Hobbies from "Components/Hobbies";
+import Briefcase from "Components/Briefcase";
+import Calification from "Components/Calification";
+import Contact from "Components/Contact";
 
 export default class Landing extends Component {
 
-    componentDidMount() {
+    /*componentDidMount() {
         document.title = 'CV - Martin Amengual'
     }
 
@@ -32,6 +32,12 @@ export default class Landing extends Component {
                 <Contact lang={this.props.lang}></Contact>
                 <Footer lang={this.props.lang}></Footer>
             </section>
+        );
+    }*/
+
+    render() {
+        return(
+            <div>asdasd</div>
         );
     }
 }

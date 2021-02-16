@@ -1,5 +1,5 @@
 import { Component } from "react";
-import '../styles/ModalImage.sass'
+import 'Styles/ModalImage.sass'
 
 
 export default class ModalImage extends Component {

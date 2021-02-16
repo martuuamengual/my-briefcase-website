@@ -4,7 +4,7 @@ import {
     Route
 } from "react-router-dom";
 
-import Landing from "src/pages/Landing";
+import Landing from "Pages/Landing";
   
 export default function Rooter() {
     return (

@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
 import reportWebVitals from './reportWebVitals';
-import Rooter from './pages/Rooter';
+import Rooter from 'Pages/Rooter';
+import Mailgun from 'Components/Mailgun';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <Rooter />
+    <Mailgun />
   </React.StrictMode>,
   document.getElementById('root')
 );

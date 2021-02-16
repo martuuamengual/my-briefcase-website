@@ -1,7 +1,7 @@
 import { Component } from "react";
-import 'src/styles/Calification.sass';
+import 'Styles/Calification.sass';
 import $ from 'jquery';
-import LanguageUtils from "src/utils/LanguageUtils";
+import LanguageUtils from "Utils/LanguageUtils";
 
 
 export default class Calification extends Component {

@@ -1,8 +1,7 @@
 import { Component } from "react";
-import 'src/styles/Hobbies.sass';
-import github from 'src/images/GitHub.svg'
-import LanguageUtils from "src/utils/LanguageUtils";
-import ReactHtmlParser from 'react-html-parser';
+import 'Styles/Hobbies.sass';
+import LanguageUtils from "Utils/LanguageUtils";
+import ReactHtmlParser from 'html-react-parser';
 
 export default class Hobbies extends Component {
     

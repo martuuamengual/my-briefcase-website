@@ -1,9 +1,11 @@
 import { Component } from "react";
-import LanguageUtils from "src/utils/LanguageUtils";
+import LanguageUtils from "Utils/LanguageUtils";
 
-var API_KEY = 'key-134a299a885829bcc9aed4341297e213';
+/*var API_KEY = process.env.EMAIL_API_KEY;
+var DOMAIN = process.env.EMAIL_DOMAIN;*/
+/*var API_KEY = 'key-134a299a885829bcc9aed4341297e213'
 var DOMAIN = 'sandboxec409549fbf347c09e765fff1c403d86.mailgun.org';
-var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});
+var mailgun = require('mailgun-js')({apiKey: API_KEY, domain: DOMAIN});*/
 
 
 export default class Contact extends Component {
