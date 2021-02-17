@@ -1,6 +1,6 @@
 import { Component } from "react";
-import briefcase from 'Images/briefcase.svg'
-import LanguageUtils from "Utils/LanguageUtils";
+import briefcase from 'src/images/briefcase.svg'
+import LanguageUtils from "src/utils/LanguageUtils";
 
 export default class Experience extends Component {
 

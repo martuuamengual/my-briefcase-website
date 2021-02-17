@@ -1,7 +1,7 @@
 
 import { Component } from 'react'
-import LanguageUtils from 'Utils/LanguageUtils';
-import 'Styles/NavBar.sass'
+import LanguageUtils from 'src/utils/LanguageUtils';
+import 'src/styles/NavBar.sass'
 import NavBarButton from './NavBarButton';
 import $ from 'jquery';
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import 'Styles/ProgressBar.sass'
+import 'src/styles/ProgressBar.sass'
 
 
 export default class ProgressBar extends Component {

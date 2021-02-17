@@ -1,6 +1,6 @@
 import { Component } from "react";
-import 'Styles/Hobbies.sass';
-import LanguageUtils from "Utils/LanguageUtils";
+import 'src/styles/Hobbies.sass';
+import LanguageUtils from "src/utils/LanguageUtils";
 import ReactHtmlParser from 'html-react-parser';
 
 export default class Hobbies extends Component {

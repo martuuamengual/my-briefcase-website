@@ -1,8 +1,8 @@
 import { Component } from "react";
-import LanguageUtils from "Utils/LanguageUtils";
-import github from 'Images/GitHub.svg';
+import LanguageUtils from "src/utils/LanguageUtils";
+import github from 'src/images/GitHub.svg';
 import ReactHtmlParser from 'html-react-parser';
-import 'Styles/Briefcase.sass';
+import 'src/styles/Briefcase.sass';
 
 
 export default class Briefcase extends Component {

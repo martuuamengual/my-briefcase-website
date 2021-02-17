@@ -1,5 +1,5 @@
 import { Component } from "react";
-import StringUtils from 'Utils/StringUtils'
+import StringUtils from 'src/utils/StringUtils'
 
 export default class NavBarButton extends Component {
 

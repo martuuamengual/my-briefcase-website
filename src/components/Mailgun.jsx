@@ -1,22 +1,30 @@
 import { Component } from "react";
+import { Mailgun as MailgunModel } from 'src/models/Mailgun.model';
+import EnviromentUtils from "src/utils/EnviromentUtils";
 
 
 export default class Mailgun extends Component {
     
     componentDidMount() {
-        console.log('asd');
 
-        /*data = {
-            asd: 'asd'
-        };
+        const API_KEY = EnviromentUtils.getValue('API_KEY');
+        const DOMAIN = EnviromentUtils.getValue('DOMAIN');
+        const SEND_EMAIL = EnviromentUtils.getBoolean('SEND_EMAIL');
 
-        domain = 'sandboxec409549fbf347c09e765fff1c403d86.mailgun.org';
-
-        console.log('https://api.mailgun.net/v3/${domain}/messages')
-
-        /*fetch('https://api.mailgun.net/v3/${domain}/messages').then(function(info) {
-            console.log(info);
-        })*/
+        if (SEND_EMAIL) {
+            const data = {
+                from: 'INFO-CV <info@martu-amengual.cv>',
+                to: 'martuu.amengual@gmail.com',
+                subject: 'Martu testing this',
+                text: 'JAJAJAJ'
+            };
+            
+            let mailgun = new MailgunModel({api_key: API_KEY, domain: DOMAIN});
+            mailgun.sendEmail(data).then(function(info) {
+                console.log(info.json());
+            });
+        }
+        
     }
 
     render() {

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import 'Styles/LanguageButton.sass';
+import 'src/styles/LanguageButton.sass';
 
 
 export default class LanguageButton extends Component {

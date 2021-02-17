@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
-import 'Styles/Intro.sass'
-import location from 'Images/location.svg'
+import 'src/styles/Intro.sass'
+import location from 'src/images/location.svg'
 import ModalImage from './ModalImage';
 
 export default class Intro extends Component {

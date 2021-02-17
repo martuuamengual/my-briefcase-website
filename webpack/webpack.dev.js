@@ -2,9 +2,16 @@ const path = require('path');
 const fs = require('fs');
 const common = require('./webpack.common');
 const { merge } = require('webpack-merge');
+const webpack = require('webpack');
 
 // root path for this project
-const ROOT = __dirname;
+const ROOT = path.join(__dirname, '../');
+
+var dotenv = require('dotenv').config({path: path.join(ROOT, '.env.dev')});
+
+console.log(dotenv.parsed)
+console.log(JSON.stringify(dotenv.parsed))
+
 
 module.exports = merge(common,
     {
@@ -17,6 +24,11 @@ module.exports = merge(common,
             historyApiFallback: true,
             port: 3000,
         },
+        plugins: [
+            new webpack.DefinePlugin({
+                'process.env': JSON.stringify(dotenv.parsed)
+            }),
+        ],
         output: {
             filename: '[name].bundle.js',
             path: path.join(ROOT, 'src'),

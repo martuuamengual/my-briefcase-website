@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ProgressBar from 'Components/ProgressBar';
+import ProgressBar from 'src/components/ProgressBar';
 
 
 export default class Skills extends Component {

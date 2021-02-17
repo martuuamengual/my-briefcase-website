@@ -16,6 +16,13 @@ class StringUtils {
         return false;
     }
 
+    static format(value, ...values) {
+        for (let k in values) {
+            value = value.replace("{" + k + "}", values[k])
+        }
+        return value;
+    }
+
 }
 
 export default StringUtils;

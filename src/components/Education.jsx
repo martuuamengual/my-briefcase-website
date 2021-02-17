@@ -1,7 +1,7 @@
 import { Component } from "react";
-import university from 'Images/university.svg';
+import university from 'src/images/university.svg';
 import ReactHtmlParser from 'html-react-parser';
-import LanguageUtils from 'Utils/LanguageUtils';
+import LanguageUtils from 'src/utils/LanguageUtils';
 
 export default class Education extends Component {
 
