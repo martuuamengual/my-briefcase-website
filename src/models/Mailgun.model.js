@@ -1,4 +1,4 @@
-import StringUtils from "Utils/StringUtils";
+import StringUtils from "src/utils/StringUtils";
 
 
 class Mailgun extends Object {

@@ -7,11 +7,6 @@ const webpack = require('webpack');
 // root path for this project
 const ROOT = path.join(__dirname, '../');
 
-var dotenv = require('dotenv').config({path: path.join(ROOT, '.env.dev')});
-
-console.log(dotenv.parsed)
-console.log(JSON.stringify(dotenv.parsed))
-
 
 module.exports = merge(common,
     {

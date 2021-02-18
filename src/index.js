@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
 import reportWebVitals from './reportWebVitals';
-import Rooter from 'Pages/Rooter';
-import Mailgun from 'Components/Mailgun';
+import Rooter from 'src/pages/Rooter';
+import Mailgun from 'src/components/Mailgun';
 
 
 ReactDOM.render(
