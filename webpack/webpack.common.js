@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const alias = require('./webpack.alias');
 const { merge } = require('webpack-merge');
 
+
 module.exports = merge(alias, {
   target: 'web', //we need this line because webpack 5 with webpack-web-server v3 has a bug with hot reload.
   entry: {

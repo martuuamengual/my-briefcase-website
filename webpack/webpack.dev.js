@@ -1,5 +1,4 @@
 const path = require('path');
-const fs = require('fs');
 const common = require('./webpack.common');
 const { merge } = require('webpack-merge');
 const webpack = require('webpack');
@@ -7,6 +6,10 @@ const webpack = require('webpack');
 // root path for this project
 const ROOT = path.join(__dirname, '../');
 
+var dotenvDev = require('dotenv').config({path: path.join(ROOT, '.env.dev')});
+var dotenvCommon = require('dotenv').config({path: path.join(ROOT, '.env.common')});
+
+var env = require('./webpack.helper').merge(dotenvCommon.parsed, dotenvDev.parsed);
 
 module.exports = merge(common,
     {
@@ -21,7 +24,7 @@ module.exports = merge(common,
         },
         plugins: [
             new webpack.DefinePlugin({
-                'process.env': JSON.stringify(dotenv.parsed)
+                'process.env': JSON.stringify(env)
             }),
         ],
         output: {
