@@ -14,7 +14,7 @@ import Contact from "src/components/Contact";
 
 export default class Landing extends Component {
 
-    /*componentDidMount() {
+    componentDidMount() {
         document.title = 'CV - Martin Amengual'
     }
 
@@ -33,11 +33,6 @@ export default class Landing extends Component {
                 <Footer lang={this.props.lang}></Footer>
             </section>
         );
-    }*/
-
-    render() {
-        return(
-            <div>asdasd</div>
-        );
     }
+
 }

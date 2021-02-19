@@ -4,12 +4,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js';
 import reportWebVitals from './reportWebVitals';
 import Rooter from 'src/pages/Rooter';
-import Mailgun from 'src/components/Mailgun';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <Mailgun />
+    <Rooter />
   </React.StrictMode>,
   document.getElementById('root')
 );
