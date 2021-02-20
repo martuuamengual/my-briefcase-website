@@ -22,7 +22,7 @@ if (fs.existsSync(publicPath)) {
         console.log(chalk.magenta('₪ '), chalk.green('Server is up!'));
         let link = 'http://localhost:' + port;
         console.log(chalk.magenta('₪ '), chalk.green('Enter to ' + link));
-        open(link)
+        //open(link);
     });
 } else {
     // colors reference:  https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color
