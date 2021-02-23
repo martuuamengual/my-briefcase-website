@@ -5,27 +5,49 @@ const app = express();
 const chalk = require('chalk');
 const open = require('open');
 
+const ROOT = path.join(__dirname, '..');
 
-const publicPath = path.join(__dirname, '..', 'build');
+/* SETTING ENV VARIABLES */
+var dotenvDev = require('dotenv').config({path: path.join(ROOT, '.env.dev')});
+var dotenvCommon = require('dotenv').config({path: path.join(ROOT, '.env.common')});
+/* ===================== */
 
+const buildPath = path.join(__dirname, '..', 'build');
+const imagesPath = path.join(buildPath, 'images');
+const jsPath = path.join(buildPath, 'js');
+const publicPath = path.join(buildPath, 'public');
 const port = process.env.PORT || 3000;
 
-if (fs.existsSync(publicPath)) {
-    app.use(express.static(publicPath));
 
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(publicPath, 'index.html'));
-    });
+
+if (fs.existsSync(buildPath)) {
+
+    app.use('/images', express.static(imagesPath));
+    app.use('/js', express.static(jsPath));
+    app.use('/public', express.static(publicPath));
+
+    const { logReqMiddleware, notFundMiddelware, serverErrorMiddelware } = require('./utils/RequestUtils')
+
+    app.use(logReqMiddleware)
+    
+    require('./routes')(app, buildPath);
+
+    app.use(notFundMiddelware);
+
+    app.use(serverErrorMiddelware);
 
     app.listen(port, () => {
-        console.log(chalk.magenta('₪ '), chalk.blue('Runing app from ../build/ folder'));
+        console.log(chalk.magenta('₪ '), chalk.blue('Runing app in'), chalk.yellow(process.env.NODE_ENV), chalk.blue('mode'));
         console.log(chalk.magenta('₪ '), chalk.green('Server is up!'));
         let link = 'http://localhost:' + port;
         console.log(chalk.magenta('₪ '), chalk.green('Enter to ' + link));
-        //open(link);
+        console.log('');
+        if(process.argv.slice(2)[0] === '--open') {
+            open(link);
+        }
     });
 } else {
     // colors reference:  https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color
-    console.log(chalk.magenta('₪ '), publicPath, chalk.red('directory not exists'))
+    console.log(chalk.magenta('₪ '), buildPath, chalk.red('directory not exists'))
     console.log(chalk.magenta('₪ '), 'Please run', chalk.green('npm run build'), 'to solve this.')
 }

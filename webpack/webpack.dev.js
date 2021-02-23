@@ -11,6 +11,8 @@ var dotenvCommon = require('dotenv').config({path: path.join(ROOT, '.env.common'
 
 var env = require('./webpack.helper').merge(dotenvCommon.parsed, dotenvDev.parsed);
 
+const CopyPlugin = require('copy-webpack-plugin');
+
 module.exports = merge(common,
     {
         mode: 'development',
@@ -26,9 +28,14 @@ module.exports = merge(common,
             new webpack.DefinePlugin({
                 'process.env': JSON.stringify(env)
             }),
+            new CopyPlugin({
+                patterns: [
+                    { from: "./public", to: "public" },
+                ],
+            }),
         ],
         output: {
-            filename: '[name].bundle.js',
+            filename: 'js/[name].bundle.js',
             path: path.join(ROOT, 'src'),
         },
     });

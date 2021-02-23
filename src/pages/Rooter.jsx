@@ -5,7 +5,8 @@ import {
 } from "react-router-dom";
 
 import Landing from "src/pages/Landing";
-  
+import NotFound from "./NotFound";
+
 export default function Rooter() {
     return (
         <Router>
@@ -26,7 +27,7 @@ export default function Rooter() {
                 <Landing lang='en' />
             </Route>
             <Route path="*">
-                <NotMatch />
+                <NotFound />
             </Route>
             </Switch>
         </Router>
@@ -39,8 +40,4 @@ function About() {
 
 function Users() {
     return <h2>Users</h2>;
-}
-
-function NotMatch() {
-    return <h2>ERROR!!! 404</h2>;
 }

@@ -35,8 +35,28 @@ module.exports = merge(alias, {
                 use: ['style-loader', 'css-loader', 'sass-loader'],
             },
             {
-                test: /\.(svg|png|jpg|gif)$/,
-                use: 'file-loader',
+                test: /\.(png|jpg|gif)$/,
+                loader: 'file-loader',
+                options: {
+                    outputPath: 'images',
+                },
+            },
+            {
+                test: /\.svg$/,
+                use: [
+                    {
+                        loader: '@svgr/webpack',
+                        options: {
+                            outputPath: 'images',
+                        },
+                    },
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            outputPath: 'images',
+                        },
+                    },
+                ],
             }
         ]
     },
