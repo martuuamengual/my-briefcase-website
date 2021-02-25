@@ -8,11 +8,23 @@ const mg = mailgun.client({
 });
 
 class Mail {
-    static sendContactMessage(body) {
+    static checkEnviroment() {
         if (!EnviromentUtils.compare('NODE_ENV', 'production') && !EnviromentUtils.getBoolean('SEND_EMAIL')) {
-            return new Promise(function (resolve, rejt) {
-                resolve();
-            });
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    static promise() {
+        return new Promise(function (resolve, rejt) {
+            resolve();
+        });
+    }
+
+    static sendContactMessage(body) {
+        if (Mail.checkEnviroment()) {
+            return Mail.promise()
         }
         let name = body.name;
         let email = body.email;
@@ -24,6 +36,20 @@ class Mail {
             from: "CONTACT-CV <info@martuu.amengual.com>",
             to: ["martuu.amengual@gmail.com"],
             subject: "You recive a contact from website cv",
+            text: text
+        })
+    }
+
+    static sendCalificationMessage(stars) {
+        if (Mail.checkEnviroment()) {
+            return Mail.promise()
+        }
+        let text = 'A user gives you' + stars + ' STARS';
+
+        return mg.messages.create(EnviromentUtils.getValue('DOMAIN'), {
+            from: "CALIFICATION-CV <info@martuu.amengual.com>",
+            to: ["martuu.amengual@gmail.com"],
+            subject: "You recive a calification from website cv",
             text: text
         })
     }

@@ -4,6 +4,8 @@ const fs = require('fs')
 const app = express();
 const chalk = require('chalk');
 const open = require('open');
+const cors = require('cors');
+const requestIp = require('request-ip');
 
 const ROOT = path.join(__dirname, '..');
 
@@ -16,11 +18,21 @@ const buildPath = path.join(__dirname, '..', 'build');
 const imagesPath = path.join(buildPath, 'images');
 const jsPath = path.join(buildPath, 'js');
 const publicPath = path.join(buildPath, 'public');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 
 
 if (fs.existsSync(buildPath)) {
+
+    const db = require("./database.js")
+
+    app.use(requestIp.mw())
+
+    if (process.env.NODE_ENV !== 'production') {
+        app.use(cors());
+    }
+
+    app.use(express.json());
 
     app.use('/images', express.static(imagesPath));
     app.use('/js', express.static(jsPath));

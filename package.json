@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.6.0",
     "bootstrap": "^4.5.3",
     "chalk": "^4.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "html-react-parser": "^1.2.4",
@@ -22,7 +23,9 @@
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "request-ip": "^2.1.3",
     "sass": "^1.32.7",
+    "sqlite3": "^5.0.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -76,7 +79,9 @@
       "chalk",
       "open",
       "multer",
-      "mailgun.js"
+      "mailgun.js",
+      "sqlite3",
+      "request-ip"
     ]
   }
 }

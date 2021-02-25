@@ -7,7 +7,8 @@ import LanguageUtils from "src/utils/LanguageUtils";
 export default class Calification extends Component {
 
     state = {
-        lang: this.props.lang
+        lang: this.props.lang,
+        show: true
     }
 
     content = {
@@ -23,6 +24,21 @@ export default class Calification extends Component {
         }
     }
 
+    componentDidMount() {
+        fetch('http://localhost:8080/api/calification/check', {
+            method: 'POST',
+            cache: 'no-cache'
+        }).then((response) => {
+            response.json().then((data) => {
+                if (data.status === 'denied') {
+                    let state = {...this.state}
+                    state.show = false
+                    this.setState(state);
+                }
+            })
+        })
+    }
+
     handleOver = (event) => {
         let star = event.target;
         star.classList.remove('far');
@@ -36,7 +52,6 @@ export default class Calification extends Component {
     }
 
     handleClick = (event) => {
-        let content = LanguageUtils.getContent(this.props.lang, this.content);
         let currentStar = event.target;
         let currentStarNum = parseInt(currentStar.dataset.star, 10);
         let listStar = [];
@@ -57,6 +72,27 @@ export default class Calification extends Component {
         notSelectedListStar.forEach(function (element) {
             element.addClass('checked');
         });
+
+
+        fetch('http://localhost:8080/api/calification/set', {
+            method: 'PUT',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({stars: listStar.length-1})
+        }).then((response) => {
+            response.json().then((data) => {
+                if (data.status === 'ok') {
+                    this.animationStars()
+                }
+            })
+        });
+    }
+
+    animationStars() {
+        let content = LanguageUtils.getContent(this.props.lang, this.content);
+        
         setTimeout(function() {
             let ratingContainer = $('.rating-container');
             ratingContainer.fadeOut(500, function() {
@@ -73,6 +109,7 @@ export default class Calification extends Component {
         let content = LanguageUtils.getContent(this.props.lang, this.content);
         return(
             <section className="calification">
+                {this.state.show &&
                 <div className="container-fluid mt-80px">
                     <div className="row justify-content-center align-items-center mtu-row">
                         <div className="col-xl"></div>
@@ -92,6 +129,7 @@ export default class Calification extends Component {
                         <div className="col-xl"></div>
                     </div>
                 </div>
+                }
             </section>
         );
     }

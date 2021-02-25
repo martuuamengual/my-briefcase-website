@@ -4,11 +4,13 @@ import 'src/styles/Contact.sass'
 import $ from 'jquery';
 import { connect } from 'react-redux';
 import { setName, setEmail, setMessage } from 'src/redux/Contact/slice/form'
+import ReactHtmlParser from 'html-react-parser';
 
 class Contact extends Component {
 
     state = {
-        lang: this.props.lang
+        lang: this.props.lang,
+        show: true
     }
 
     content = {
@@ -19,7 +21,8 @@ class Contact extends Component {
                 email: 'Correo electronico',
                 message: 'Mensaje'
             },
-            thanksMessage: 'Gracias por contactarme, me pondre en contacto en breve.'
+            thanksMessage: 'Gracias por contactarme, me pondre en contacto en breve.',
+            errorMessage: 'Lo sentimos, estamos experimentando un error, si desea puede enviarme un email a <strong>martuu.amengual@gmail.com</strong>'
         },
         en: {
             title: 'CONTACT',
@@ -28,7 +31,8 @@ class Contact extends Component {
                 email: 'Email address',
                 message: 'Message'
             },
-            thanksMessage: 'Thank you for contacting me, I will be in touch shortly.'
+            thanksMessage: 'Thank you for contacting me, I will be in touch shortly.',
+            errorMessage: 'Sorry, we are experiencing an error, if you want you can send me an email to <strong>martuu.amengual@gmail.com</strong>'
         }
     }
 
@@ -38,6 +42,22 @@ class Contact extends Component {
         this.textButton = React.createRef();
         this.spinnerBorder = React.createRef();
         this.thanksContainer = React.createRef();
+        this.errorContainer = React.createRef();
+    }
+
+    componentDidMount() {
+        fetch('http://localhost:8080/api/contact/check', {
+            method: 'POST',
+            cache: 'no-cache'
+        }).then((response) => {
+            response.json().then((data) => {
+                if (data.status === 'denied') {
+                    let state = {...this.state}
+                    state.show = false
+                    this.setState(state);
+                }
+            })
+        })
     }
 
     handleSubmit = (event) => {
@@ -47,13 +67,6 @@ class Contact extends Component {
         $(this.textButton.current).hide()
         $(this.spinnerBorder.current).addClass('show')
 
-        setTimeout(() => {
-            let $form = $(event.target);
-            $form.slideUp(500, () => {
-                $(this.thanksContainer.current).removeClass('hidden').hide().slideDown(200);
-            });
-        }, 1000);
-
         let { name } = this.props.form
         let { email } = this.props.form
         let { message } = this.props.form
@@ -62,21 +75,43 @@ class Contact extends Component {
         formData.append('name', name);
         formData.append('email', email);
         formData.append('message', message);
-        fetch('/api/send-message', {
+        fetch('http://localhost:8080/api/send-message', {
             method: 'POST',
             cache: 'no-cache',
             body: formData
-        }).then(function (response) {
-            response.then(function(data) {
-                console.log(data.json())
+        }).then((response) => {
+            response.json().then((data) => {
+                if (data.status === "ok") {
+                    fetch('http://localhost:8080/api/contact/set', {
+                        method: 'PUT',
+                        cache: 'no-cache'
+                    }).then((response) => {
+                        response.json().then((data) => {
+                            if (data.status === 'ok') {
+                                setTimeout(() => {
+                                    let $form = $(event.target);
+                                    $form.slideUp(500, () => {
+                                        $(this.thanksContainer.current).removeClass('hidden').hide().slideDown(200);
+                                    });
+                                }, 1000);
+                            }
+                        })
+                    });
+                } else {
+                    // show error
+                    $(this.errorContainer.current).removeClass('hidden').hide().slideDown(200);
+                }
             })
-        });
+        }).catch((error) => {
+            $(this.errorContainer.current).removeClass('hidden').hide().slideDown(200);
+        })
     }
 
     render() {
         let content = LanguageUtils.getContent(this.props.lang, this.content);
         return(
             <section className="contact">
+            {this.state.show &&
                 <div className="container mt-50px">
                     <div className="mtu-title">{content.title}</div>
                     <div className="row">
@@ -103,10 +138,14 @@ class Contact extends Component {
                             <p className="text-center hidden" ref={this.thanksContainer}>
                                 {content.thanksMessage}
                             </p>
+                            <p className="error-message text-center hidden" ref={this.errorContainer}>
+                                {ReactHtmlParser(content.errorMessage)}
+                            </p>
                         </div>
                         <div className="col-xl-3"></div>
                     </div>
                 </div>
+                }
             </section>
         );
     }
