@@ -12,6 +12,9 @@ import Briefcase from "src/components/Briefcase";
 import Calification from "src/components/Calification";
 import Contact from "src/components/Contact";
 
+import store from 'src/redux/Contact/store'
+import { Provider } from 'react-redux'
+
 export default class Landing extends Component {
 
     componentDidMount() {
@@ -29,7 +32,9 @@ export default class Landing extends Component {
                 <Hobbies lang={this.props.lang}></Hobbies>
                 <Briefcase lang={this.props.lang}></Briefcase>
                 <Calification lang={this.props.lang}></Calification>
-                <Contact lang={this.props.lang}></Contact>
+                <Provider store={store}>
+                    <Contact lang={this.props.lang}></Contact>
+                </Provider>
                 <Footer lang={this.props.lang}></Footer>
             </section>
         );

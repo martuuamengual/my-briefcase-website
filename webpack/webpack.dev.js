@@ -37,5 +37,6 @@ module.exports = merge(common,
         output: {
             filename: 'js/[name].bundle.js',
             path: path.join(ROOT, 'src'),
+            publicPath: '/',
         },
     });
