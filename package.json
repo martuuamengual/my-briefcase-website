@@ -12,6 +12,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "formik": "^2.2.6",
     "html-react-parser": "^1.2.4",
     "jquery": "^3.5.1",
     "mailgun.js": "^3.2.0",

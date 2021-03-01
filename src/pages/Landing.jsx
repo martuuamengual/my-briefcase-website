@@ -15,6 +15,7 @@ import Contact from "src/components/Contact";
 import store from 'src/redux/Contact/store'
 import { Provider } from 'react-redux'
 
+
 export default class Landing extends Component {
 
     componentDidMount() {

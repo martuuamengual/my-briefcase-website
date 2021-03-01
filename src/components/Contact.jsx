@@ -4,7 +4,10 @@ import 'src/styles/Contact.sass'
 import $ from 'jquery';
 import { connect } from 'react-redux';
 import { setName, setEmail, setMessage } from 'src/redux/Contact/slice/form'
-import ReactHtmlParser from 'html-react-parser';
+import StringUtils from "src/utils/StringUtils";
+import FormContact from "./FormContact";
+import { Language } from 'src/translate/index'
+import Input from "./form/Input";
 
 class Contact extends Component {
 
@@ -16,28 +19,18 @@ class Contact extends Component {
     content = {
         es: {
             title: 'CONTACTO',
-            form: {
-                name: 'Nombre',
-                email: 'Correo electronico',
-                message: 'Mensaje'
-            },
-            thanksMessage: 'Gracias por contactarme, me pondre en contacto en breve.',
-            errorMessage: 'Lo sentimos, estamos experimentando un error, si desea puede enviarme un email a <strong>martuu.amengual@gmail.com</strong>'
         },
         en: {
             title: 'CONTACT',
-            form: {
-                name: 'Name',
-                email: 'Email address',
-                message: 'Message'
-            },
-            thanksMessage: 'Thank you for contacting me, I will be in touch shortly.',
-            errorMessage: 'Sorry, we are experiencing an error, if you want you can send me an email to <strong>martuu.amengual@gmail.com</strong>'
+            asd: {
+                dd: 'puta'
+            }
         }
     }
 
     constructor(props) {
         super(props);
+        this.formRef = React.createRef();
         this.sendButton = React.createRef();
         this.textButton = React.createRef();
         this.spinnerBorder = React.createRef();
@@ -62,10 +55,99 @@ class Contact extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        event.stopPropagation();
 
+        this.showAnimationLoadingButton()
+
+        this.validateFormAndShowMessages(true)
+    }
+
+    showAnimationLoadingButton() {
         $(this.sendButton.current).prop('disabled', true)
         $(this.textButton.current).hide()
         $(this.spinnerBorder.current).addClass('show')
+    }
+
+    resetAnimationLoadingButton() {
+        $(this.textButton.current).show()
+        $(this.spinnerBorder.current).removeClass('show')
+        $(this.sendButton.current).prop('disabled', false)
+    }
+
+    validateFormAndShowMessages(isSubmited) {
+
+        let { name } = this.props.form
+        let { email } = this.props.form
+        let { message } = this.props.form
+
+        let $form = $(this.formRef.current)
+        let cssValid = 'is-valid'
+        let cssInvalid = 'is-invalid'
+
+        let data = {
+            name: name, 
+            email: email, 
+            message: message, 
+            $form: $form, 
+            cssValid: cssValid, 
+            cssInvalid: cssInvalid
+        }
+
+        
+        if (StringUtils.areValidFields(name, email, message)) {
+            if (isSubmited) {
+                this.sendMessage()
+            }
+            this.updateFieldsMessages(data)
+        } else {
+            this.updateFieldsMessages(data)
+        }
+    }
+
+    updateFieldsMessages(data) {
+        this.resetAnimationLoadingButton()
+        this.checkNameField(data)
+        this.checkEmailField(data)
+        this.checkMessageField(data)
+    }
+
+    checkNameField(data) {
+        let $name = data.$form.find('input[id="name"]')
+
+        if (StringUtils.isValidField(data.name)) {
+            $name.removeClass(data.cssInvalid)
+            $name.addClass(data.cssValid)
+        } else {
+            $name.removeClass(data.cssValid)
+            $name.addClass(data.cssInvalid)
+        }
+    }
+
+    checkEmailField(data) {
+        let $email = data.$form.find('input[id="email"]')
+
+        if (StringUtils.isValidField(data.email)) {
+            $email.removeClass(data.cssInvalid)
+            $email.addClass(data.cssValid)
+        } else {
+            $email.removeClass(data.cssValid)
+            $email.addClass(data.cssInvalid)
+        }
+    }
+
+    checkMessageField(data) {
+        let $message = data.$form.find('textarea[id="message"]')
+
+        if (StringUtils.isValidField(data.message)) {
+            $message.removeClass(data.cssInvalid)
+            $message.addClass(data.cssValid)
+        } else {
+            $message.removeClass(data.cssValid)
+            $message.addClass(data.cssInvalid)
+        }
+    }
+
+    sendMessage() {
 
         let { name } = this.props.form
         let { email } = this.props.form
@@ -89,7 +171,7 @@ class Contact extends Component {
                         response.json().then((data) => {
                             if (data.status === 'ok') {
                                 setTimeout(() => {
-                                    let $form = $(event.target);
+                                    let $form = $(this.formRef.current);
                                     $form.slideUp(500, () => {
                                         $(this.thanksContainer.current).removeClass('hidden').hide().slideDown(200);
                                     });
@@ -107,6 +189,10 @@ class Contact extends Component {
         })
     }
 
+    handleChange = () => {
+        console.log('eeee')
+    }
+
     render() {
         let content = LanguageUtils.getContent(this.props.lang, this.content);
         return(
@@ -117,30 +203,7 @@ class Contact extends Component {
                     <div className="row">
                         <div className="col-xl-3"></div>
                         <div className="col-xl-6">
-                            <form onSubmit={this.handleSubmit}>
-                                <div className="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" className="form-control" id="name" placeholder="John Feneck" onChange={(event) => this.props.setName(event.target.value)} />
-                                </div>
-                                <div className="form-group">
-                                    <label for="exampleFormControlInput1">Email address</label>
-                                    <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" onChange={(event) => this.props.setEmail(event.target.value)} />
-                                </div>
-                                <div className="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea className="form-control" id="message" rows="5" onChange={(event) => this.props.setMessage(event.target.value)}></textarea>
-                                </div>
-                                <button type="submit" className="btn btn-primary" ref={this.sendButton}>
-                                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" ref={this.spinnerBorder}></span>
-                                    <span ref={this.textButton}>Send</span>
-                                </button>
-                            </form>
-                            <p className="text-center hidden" ref={this.thanksContainer}>
-                                {content.thanksMessage}
-                            </p>
-                            <p className="error-message text-center hidden" ref={this.errorContainer}>
-                                {ReactHtmlParser(content.errorMessage)}
-                            </p>
+                            <FormContact lang={this.props.lang} />
                         </div>
                         <div className="col-xl-3"></div>
                     </div>
@@ -167,12 +230,13 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
     return {
-        form: {
-            name: state.form.name,
-            email: state.form.email,
-            message: state.form.message
+        contactForm: {
+            name: state.contactForm.name,
+            email: state.contactForm.email,
+            message: state.contactForm.message
         }
     }
   }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Contact);
+//export default Contact;
