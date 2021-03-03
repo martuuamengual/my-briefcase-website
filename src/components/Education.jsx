@@ -1,13 +1,9 @@
 import { Component } from "react";
 import university from 'src/images/university.svg';
 import ReactHtmlParser from 'html-react-parser';
-import LanguageUtils from 'src/utils/LanguageUtils';
+import { Language } from '@react-lang/language'
 
 export default class Education extends Component {
-
-    state = {
-        lang: this.props.lang
-    }
 
     content = {
         es: {
@@ -44,57 +40,60 @@ export default class Education extends Component {
     
 
     render() {
-        let content = LanguageUtils.getContent(this.state.lang, this.content);
         return (
-            <section className="education">
-                <div className="container mt-120px">
-                    <div className="mtu-title">{content.title}</div>
-                    <div className="row justify-content-center align-items-center mtu-education">
-                        <div className="col-xl">
-                            <div className="card" style={{ height: "214px" }}>
-                                <div className="card-body">
-                                    <h5 className="card-title mtu-card-title">2005-2010</h5>
-                                    <p className="card-text mtu-card-text">
-                                        <img src={university} alt="univerisity"/>
-                                        Inst. La Salle Florida, Buenos aires - {content.primary.title_description}
-                                    </p>
-                                    <p className="card-text">
-                                        {content.primary.description}
-                                    </p>
+            <Language.Consumer>
+                {({ get }) => (
+                    <section className="education">
+                        <div className="container mt-120px">
+                            <div className="mtu-title">{get(this.content, 'title')}</div>
+                            <div className="row justify-content-center align-items-center mtu-education">
+                                <div className="col-xl">
+                                    <div className="card" style={{ height: "214px" }}>
+                                        <div className="card-body">
+                                            <h5 className="card-title mtu-card-title">2005-2010</h5>
+                                            <p className="card-text mtu-card-text">
+                                                <img src={university} alt="univerisity"/>
+                                                Inst. La Salle Florida, Buenos aires - {get(this.content, 'primary.title_description')}
+                                            </p>
+                                            <p className="card-text">
+                                                {get(this.content, 'primary.description')}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-xl mt-xl-0 mt-5">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <h5 className="card-title mtu-card-title">2011-2017</h5>
+                                            <p className="card-text mtu-card-text">
+                                                <img src={university} alt="univerisity"/>
+                                                Inst. La Salle Florida, Buenos aires - {get(this.content, 'secondary.title_description')}
+                                            </p>
+                                            <p className="card-text">
+                                                {get(this.content, 'secondary.description')}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-xl mt-xl-0 mt-5">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <h5 className="card-title mtu-card-title">2017-2021</h5>
+                                            <p className="card-text mtu-card-text">
+                                                <img src={university} alt="univerisity"/>
+                                                {get(this.content, 'tertiary.title_description')}
+                                            </p>
+                                            <p className="card-text">
+                                                {ReactHtmlParser(get(this.content, 'tertiary.description'))}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-xl mt-xl-0 mt-5">
-                            <div className="card">
-                                <div className="card-body">
-                                    <h5 className="card-title mtu-card-title">2011-2017</h5>
-                                    <p className="card-text mtu-card-text">
-                                        <img src={university} alt="univerisity"/>
-                                        Inst. La Salle Florida, Buenos aires - {content.secondary.title_description}
-                                    </p>
-                                    <p className="card-text">
-                                        {content.secondary.description}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl mt-xl-0 mt-5">
-                            <div className="card">
-                                <div className="card-body">
-                                    <h5 className="card-title mtu-card-title">2017-2021</h5>
-                                    <p className="card-text mtu-card-text">
-                                        <img src={university} alt="univerisity"/>
-                                        {content.tertiary.title_description}
-                                    </p>
-                                    <p className="card-text">
-                                        {ReactHtmlParser(content.tertiary.description)}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                    </section>
+                )}
+            </Language.Consumer>
         );
     }
 }

@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import LanguageUtils from "src/utils/LanguageUtils";
+import LanguageUtils from "src/utils/JqueryUtils";
 import 'src/styles/Contact.sass'
 import $ from 'jquery';
 import { connect } from 'react-redux';
-import { setName, setEmail, setMessage } from 'src/redux/Contact/slice/form'
 import StringUtils from "src/utils/StringUtils";
 import FormContact from "./FormContact";
-import { Language } from 'src/translate/index'
-import Input from "./form/Input";
 
 class Contact extends Component {
 
@@ -194,7 +191,6 @@ class Contact extends Component {
     }
 
     render() {
-        let content = LanguageUtils.getContent(this.props.lang, this.content);
         return(
             <section className="contact">
             {this.state.show &&
@@ -203,7 +199,7 @@ class Contact extends Component {
                     <div className="row">
                         <div className="col-xl-3"></div>
                         <div className="col-xl-6">
-                            <FormContact lang={this.props.lang} />
+                            <FormContact />
                         </div>
                         <div className="col-xl-3"></div>
                     </div>
@@ -214,29 +210,4 @@ class Contact extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        setName: (name) => {
-           dispatch(setName(name));
-        },
-        setEmail: (email) => {
-            dispatch(setEmail(email))
-        },
-        setMessage: (message) => {
-            dispatch(setMessage(message))
-        }
-    }
-}
-
-function mapStateToProps(state) {
-    return {
-        contactForm: {
-            name: state.contactForm.name,
-            email: state.contactForm.email,
-            message: state.contactForm.message
-        }
-    }
-  }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Contact);
-//export default Contact;
+export default Contact;

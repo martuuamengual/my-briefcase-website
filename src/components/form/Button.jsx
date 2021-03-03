@@ -11,11 +11,10 @@ export default class Button extends Component {
     }
     
     render() {
-        var {lang, ...other} = this.props;
         return(
-            <button type={this.props.type} className="btn btn-primary" ref={this.sendButton} {...other}>
+            <button type={this.props.type} className="btn btn-primary" ref={this.sendButton} {...this.props}>
                 <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" ref={this.spinnerBorder}></span>
-                <span ref={this.textButton}>{this.props.lang}</span>
+                <span ref={this.textButton}>{this.props.value}</span>
             </button>
         );
     }

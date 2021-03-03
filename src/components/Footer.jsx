@@ -1,17 +1,15 @@
 import { Component } from "react";
 import 'src/styles/Footer.sass'
+import { Language } from '@react-lang/language'
 
 export default class Footer extends Component {
 
-    state = {
-        lang: this.props.lang
-    }
-
-    getTextLanguageSelect() {
-        if (this.state.lang === 'es') {
-            return 'Spanish'
-        } else {
-            return 'English'
+    content = {
+        en: {
+            languageSelected: 'English'
+        },
+        es: {
+            languageSelected: 'Spanish'
         }
     }
 
@@ -29,12 +27,20 @@ export default class Footer extends Component {
                             <div className="dropdown dropup float-center" style={{ marginRight: "1rem" }}>
                                 <span style={{ marginRight: "1rem" }}>Language:</span>
                                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {this.getTextLanguageSelect()}
+                                    <Language.Consumer>
+                                        {({ get }) => (
+                                            <span>{get(this.content, 'languageSelected')}</span>
+                                        )}
+                                    </Language.Consumer>
                                 </button>
-                                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                    <a className="dropdown-item" href="/">English</a>
-                                    <a className="dropdown-item" href="/es">Spanish</a>
-                                </div>
+                                <Language.Consumer>
+                                    {({ handleSetLanguage }) => (
+                                        <div className="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                            <a className="dropdown-item" onClick={() => handleSetLanguage('en')} >English</a>
+                                            <a className="dropdown-item" onClick={() => handleSetLanguage('es')}>Spanish</a>
+                                        </div>
+                                    )}
+                                </Language.Consumer>
                             </div>
                         </div>
                     </div>

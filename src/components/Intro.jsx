@@ -3,18 +3,18 @@ import React, { Component } from 'react'
 import 'src/styles/Intro.sass'
 import location from 'src/images/location.svg'
 import ModalImage from './ModalImage';
+import { Language } from '@react-lang/language'
 
 export default class Intro extends Component {
 
     state = {
-        lang: this.props.lang,
         name: 'MARTIN',
         surname: 'AMENGUAL',
         location: 'Buenos aires, Argentina'
     };
 
-    getDescription() {
-        if (this.state.lang === 'es') {
+    getDescription(lang) {
+        if (lang === 'es') {
             return (
                 <span>
                     Hola, bienvenid@ me llamo Martin tengo 22 años 
@@ -77,7 +77,11 @@ export default class Intro extends Component {
                         <div className="col-xl"></div>
                         <div className="col-xl-offset" style={{ maxWidth: "70%" }}>
                             <div className="mtu-intro-description">
-                                {this.getDescription()}
+                                <Language.Consumer>
+                                    {({ lang }) => (
+                                        <span>{this.getDescription(lang)}</span>
+                                    )}
+                                </Language.Consumer>
                             </div>
                         </div>
                         <div className="col-xl"></div>

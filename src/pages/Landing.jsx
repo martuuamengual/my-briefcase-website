@@ -11,9 +11,7 @@ import Hobbies from "src/components/Hobbies";
 import Briefcase from "src/components/Briefcase";
 import Calification from "src/components/Calification";
 import Contact from "src/components/Contact";
-
-import store from 'src/redux/Contact/store'
-import { Provider } from 'react-redux'
+import GoTop from "src/components/GoTop";
 
 
 export default class Landing extends Component {
@@ -25,18 +23,17 @@ export default class Landing extends Component {
     render() {
         return(
             <section>
-                <NavBar lang={this.props.lang}></NavBar>
-                <Intro lang={this.props.lang}></Intro>
-                <Education lang={this.props.lang}></Education>
-                <Experience lang={this.props.lang}></Experience>
-                <Skills lang={this.props.lang}></Skills>
-                <Hobbies lang={this.props.lang}></Hobbies>
-                <Briefcase lang={this.props.lang}></Briefcase>
-                <Calification lang={this.props.lang}></Calification>
-                <Provider store={store}>
-                    <Contact lang={this.props.lang}></Contact>
-                </Provider>
-                <Footer lang={this.props.lang}></Footer>
+                <NavBar />
+                <Intro />
+                <Education />
+                <Experience />
+                <Skills />
+                <Hobbies />
+                <Briefcase />
+                <Calification />
+                <Contact />
+                <Footer />
+                <GoTop />
             </section>
         );
     }

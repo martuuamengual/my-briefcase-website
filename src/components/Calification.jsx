@@ -1,13 +1,12 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import 'src/styles/Calification.sass';
 import $ from 'jquery';
-import LanguageUtils from "src/utils/LanguageUtils";
+import { Language } from '@react-lang/language'
 
 
 export default class Calification extends Component {
 
     state = {
-        lang: this.props.lang,
         show: true
     }
 
@@ -15,13 +14,19 @@ export default class Calification extends Component {
         es: {
             message: 'Agradeceria que califiques mi CV',
             thanksMessage: '¡Gracias por calificar!',
-            note: 'No se podra calificar una segunda vez'
+            note: 'NOTA: No se podra calificar una segunda vez'
         },
         en: {
             message: 'I would appreciate if you rate my CV',
             thanksMessage: 'Thanks for rating!',
-            note: 'It will not be possible to qualify a second time'
+            note: 'NOTE: It will not be possible to qualify a second time'
         }
+    }
+
+    constructor(props) {
+        super(props);
+        this.messageRef = React.createRef();
+        this.thanksMessageRef = React.createRef();
     }
 
     componentDidMount() {
@@ -91,13 +96,11 @@ export default class Calification extends Component {
     }
 
     animationStars() {
-        let content = LanguageUtils.getContent(this.props.lang, this.content);
-        
         setTimeout(function() {
             let ratingContainer = $('.rating-container');
             ratingContainer.fadeOut(500, function() {
-                let span = ratingContainer.parent().find('span').first();
-                span.text(content.thanksMessage);
+                $(this.messageRef.current).hide();
+                $(this.thanksMessageRef.current).removeClass('hidden').hide().show();
                 setTimeout(function() {
                     $('.calification').slideUp(200);
                 }, 1000);
@@ -106,26 +109,30 @@ export default class Calification extends Component {
     }
 
     render() {
-        let content = LanguageUtils.getContent(this.props.lang, this.content);
         return(
             <section className="calification">
                 {this.state.show &&
                 <div className="container-fluid mt-80px">
                     <div className="row justify-content-center align-items-center mtu-row">
                         <div className="col-xl"></div>
-                        <div className="col-xl text-center">
-                            <span>{content.message}</span>
-                            <div className="rating-container">
-                                <div className="rating">
-                                    <span onClick={this.handleClick} data-star="5" className="far fa-star"></span>
-                                    <span onClick={this.handleClick} data-star="4" className="far fa-star"></span>
-                                    <span onClick={this.handleClick} data-star="3" className="far fa-star"></span>
-                                    <span onClick={this.handleClick} data-star="2" className="far fa-star"></span>
-                                    <span onClick={this.handleClick} data-star="1" className="far fa-star"></span>
+                        <Language.Consumer>
+                            {({ get }) => (
+                                <div className="col-xl text-center">
+                                    <span ref={this.messageRef}>{get(this.content, 'message')}</span>
+                                    <span className="hidden" ref={this.thanksMessageRef}>{get(this.content, 'thanksMessage')}</span>
+                                    <div className="rating-container">
+                                        <div className="rating">
+                                            <span onClick={this.handleClick} data-star="5" className="far fa-star"></span>
+                                            <span onClick={this.handleClick} data-star="4" className="far fa-star"></span>
+                                            <span onClick={this.handleClick} data-star="3" className="far fa-star"></span>
+                                            <span onClick={this.handleClick} data-star="2" className="far fa-star"></span>
+                                            <span onClick={this.handleClick} data-star="1" className="far fa-star"></span>
+                                        </div>
+                                        <span>{get(this.content, 'note')}</span>
+                                    </div>
                                 </div>
-                                <span>NOTE: {content.note}</span>
-                            </div>
-                        </div>
+                            )}
+                        </Language.Consumer>
                         <div className="col-xl"></div>
                     </div>
                 </div>

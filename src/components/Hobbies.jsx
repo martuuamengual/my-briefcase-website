@@ -1,13 +1,9 @@
 import { Component } from "react";
 import 'src/styles/Hobbies.sass';
-import LanguageUtils from "src/utils/LanguageUtils";
 import ReactHtmlParser from 'html-react-parser';
+import { Language } from '@react-lang/language'
 
 export default class Hobbies extends Component {
-    
-    state = {
-        lang: this.props.lang
-    }
 
     content = {
         es: {
@@ -39,7 +35,6 @@ export default class Hobbies extends Component {
     }
     
     render() {
-        let content = LanguageUtils.getContent(this.state.lang, this.content);
         return(
             <section className="hobbies">
                 <div className="container mt-120px">
@@ -56,7 +51,11 @@ export default class Hobbies extends Component {
                                             </a>*/}
                                     </h5>
                                     <p className="card-text">
-                                        {content.machineLearning.description}
+                                        <Language.Consumer>
+                                            {({ get }) => (
+                                                <span>{get(this.content, 'machineLearning.description')}</span>
+                                            )}
+                                        </Language.Consumer>
                                     </p>
                                 </div>
                             </div>
@@ -68,11 +67,19 @@ export default class Hobbies extends Component {
                         <div className="col-xl-8">
                             <div className="card">
                                 <div className="card-body">
-                                    <h5 className="card-title mtu-card-title mtu-hobbies-title">
-                                        {content.social.title}
-                                    </h5>
+                                    <Language.Consumer>
+                                        {({ get }) => (
+                                            <h5 className="card-title mtu-card-title mtu-hobbies-title">
+                                                {get(this.content, 'social.title')}
+                                            </h5>
+                                        )}
+                                    </Language.Consumer>
                                     <p className="card-text">
-                                        {content.social.description}
+                                        <Language.Consumer>
+                                            {({ get }) => (
+                                                <span>{get(this.content, 'social.description')}</span>
+                                            )}
+                                        </Language.Consumer>
                                     </p>
                                 </div>
                             </div>
@@ -84,11 +91,19 @@ export default class Hobbies extends Component {
                         <div className="col-xl-8">
                             <div className="card">
                                 <div className="card-body">
-                                    <h5 className="card-title mtu-card-title mtu-hobbies-title">
-                                        {content.learn.title}
-                                    </h5>
+                                    <Language.Consumer>
+                                        {({ get }) => (
+                                            <h5 className="card-title mtu-card-title mtu-hobbies-title">
+                                                {get(this.content, 'learn.title')}
+                                            </h5>
+                                        )}
+                                    </Language.Consumer>
                                     <p className="card-text">
-                                        {ReactHtmlParser(content.learn.description)}
+                                        <Language.Consumer>
+                                            {({ get }) => (
+                                                <span>{ReactHtmlParser(get(this.content, 'learn.description'))}</span>
+                                            )}
+                                        </Language.Consumer>
                                     </p>
                                 </div>
                             </div>

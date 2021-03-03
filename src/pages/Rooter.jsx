@@ -6,25 +6,24 @@ import {
 
 import Landing from "src/pages/Landing";
 import NotFound from "./NotFound";
+import { Language } from '@react-lang/language';
 
 export default function Rooter() {
     return (
         <Router>
             <Switch>
-            <Route path="/about">
-                <About />
-            </Route>
-            <Route path="/users">
-                <Users />
-            </Route>
             <Route exact path="/">
-                <Landing lang='en' />
+                <Landing />
             </Route>
             <Route exact path="/es">
-                <Landing lang='es' />
+                <Language lang='es'>
+                    <Landing />
+                </Language>
             </Route>
             <Route exact path="/en">
-                <Landing lang='en' />
+                <Language lang='en'>
+                    <Landing />
+                </Language>
             </Route>
             <Route path="*">
                 <NotFound />
@@ -32,12 +31,4 @@ export default function Rooter() {
             </Switch>
         </Router>
     );
-}
-
-function About() {
-    return <h2>About</h2>;
-}
-
-function Users() {
-    return <h2>Users</h2>;
 }

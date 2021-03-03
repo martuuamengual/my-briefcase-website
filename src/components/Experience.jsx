@@ -1,12 +1,8 @@
 import { Component } from "react";
 import briefcase from 'src/images/briefcase.svg'
-import LanguageUtils from "src/utils/LanguageUtils";
+import { Language } from '@react-lang/language'
 
 export default class Experience extends Component {
-
-    state = {
-        lang: this.props.lang
-    }
 
     content = {
         en: {
@@ -14,15 +10,27 @@ export default class Experience extends Component {
             firstCard: {
                 description: 'Languages ​​I learned'
             },
+            secondCard: {
+                li0: 'Mas de 3 años en la empresa',
+                li1: 'Allí aprendí',
+                li2: 'Procesos de revisión de código (Pull requests)',
+                li3: 'Programación de API REST en Java',
+            },
             thirdCard: {
                 title: 'Autodidact',
-                description: 'Some of the languages ​​I learned are'  
+                description: 'Some of the languages ​​I learned are'
             }
         },
         es: {
             title: 'EXPERIENCIA',
             firstCard: {
                 description: 'Lenguajes que aprendí'
+            },
+            secondCard: {
+                li0: 'More than 3 years in the company',
+                li1: 'There I learned',
+                li2: 'Code review processes (Pull requests)',
+                li3: 'Development of API REST in Java',
             },
             thirdCard: {
                 title: 'Autodidacta',
@@ -31,50 +39,15 @@ export default class Experience extends Component {
         }
     }
 
-    getSecondCardDescription() {
-        if (this.state.lang === 'es') {
-            return (
-                <span>
-                    <ul>
-                        <li>Mas de 3 años en la empresa</li>
-                    </ul>
-                    Allí aprendí:
-                    <ul>
-                        <li>Java (backend)</li>
-                        <li>Node (frontend)</li>
-                        <li>MongoDB</li>
-                        <li>DevOps (Aws, Heroku)</li>
-                        <li>Procesos de revisión de código (Pull requests)</li>
-                        <li>Programación de API REST en Java</li>
-                    </ul>
-                </span>
-            );
-        } else {
-            return (
-                <span>
-                    <ul>
-                        <li>More than 3 years in the company</li>
-                    </ul>
-                    There I learned:
-                    <ul>
-                        <li>Java (backend)</li>
-                        <li>Node (frontend)</li>
-                        <li>MongoDB</li>
-                        <li>DevOps (Aws, Heroku)</li>
-                        <li>Code review processes (Pull requests)</li>
-                        <li>Development of API REST in Java</li>
-                    </ul>
-                </span>
-            );
-        }
-    }
-
     render() {
-        let content = LanguageUtils.getContent(this.state.lang, this.content);
         return (
             <section className="experience">
                 <div className="container mt-120px">
-                    <div className="mtu-title">{content.title}</div>
+                    <Language.Consumer>
+                        {({ get }) => (
+                            <div className="mtu-title">{get(this.content, 'title')}</div>
+                        )}
+                    </Language.Consumer>
                     <div className="row justify-content-center align-items-center">
                         <div className="col-xl">
                             <div className="card" style={{ height: '375px' }}>
@@ -84,13 +57,17 @@ export default class Experience extends Component {
                                         <img src={briefcase} alt="briefcase"/>
                                         Inst. La Salle Florida, Buenos aires
                                     </p>
-                                    <div className="card-text">
-                                        {content.firstCard.description}:
-                                        <ul>
-                                            <li>Assembler</li>
-                                            <li>C++</li>
-                                        </ul>
-                                    </div>
+                                    <Language.Consumer>
+                                        {({ get }) => (
+                                            <div className="card-text">
+                                                {get(this.content, 'firstCard.description')}:
+                                                <ul>
+                                                    <li>Assembler</li>
+                                                    <li>C++</li>
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </Language.Consumer>
                                 </div>
                             </div>
                         </div>
@@ -102,9 +79,24 @@ export default class Experience extends Component {
                                         <img src={briefcase} alt="briefcase"/>
                                         Docturno, Buenos aires - <a href="http://docturno.com" target="_blank"><span>(Visit)</span></a>
                                     </p>
-                                    <div className="card-text">
-                                        {this.getSecondCardDescription()}
-                                    </div>
+                                    <Language.Consumer>
+                                        {({ get }) => (
+                                            <div className="card-text">
+                                                <ul>
+                                                    <li>{get(this.content, 'secondCard.li0')}</li>
+                                                </ul>
+                                                {get(this.content, 'secondCard.li1')}:
+                                                <ul>
+                                                    <li>Java (backend)</li>
+                                                    <li>Node (frontend)</li>
+                                                    <li>MongoDB</li>
+                                                    <li>DevOps (Aws, Heroku)</li>
+                                                    <li>{get(this.content, 'secondCard.li2')}</li>
+                                                    <li>{get(this.content, 'secondCard.li3')}</li>
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </Language.Consumer>
                                 </div>
                             </div>
                         </div>
@@ -114,10 +106,18 @@ export default class Experience extends Component {
                                     <h5 className="card-title mtu-card-title">2017-2021</h5>
                                     <p className="card-text mtu-card-text">
                                         <img src={briefcase} alt="briefcase"/>
-                                        {content.thirdCard.title}
+                                        <Language.Consumer>
+                                            {({ get }) => (
+                                                <span>{get(this.content, 'thirdCard.title')}</span>
+                                            )}
+                                        </Language.Consumer>
                                     </p>
                                     <div className="card-text">
-                                        {content.thirdCard.description}:
+                                        <Language.Consumer>
+                                            {({ get }) => (
+                                                <span>{get(this.content, 'thirdCard.description')}:</span>
+                                            )}
+                                        </Language.Consumer>
                                         <ul>
                                             <li>React</li>
                                             <li>Angular</li>

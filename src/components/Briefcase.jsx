@@ -1,15 +1,11 @@
 import { Component } from "react";
-import LanguageUtils from "src/utils/LanguageUtils";
 import github from 'src/images/GitHub.svg';
 import ReactHtmlParser from 'html-react-parser';
 import 'src/styles/Briefcase.sass';
+import { Language } from '@react-lang/language'
 
 
 export default class Briefcase extends Component {
-    
-    state = {
-        lang: this.props.lang
-    }
 
     content = {
         es: {
@@ -47,11 +43,14 @@ export default class Briefcase extends Component {
     }
     
     render() {
-        let content = LanguageUtils.getContent(this.state.lang, this.content);
         return(
             <section className="briefcase">
                 <div className="container mt-120px">
-                    <div className="mtu-title">{content.title}</div>
+                    <Language.Consumer>
+                        {({ get }) => (
+                            <div className="mtu-title">{get(this.content, 'title')}</div>
+                        )}
+                    </Language.Consumer>
                     <div className="row">
                         <div className="col-xl-4">
                             <div className="card mtu-card">
@@ -63,7 +62,11 @@ export default class Briefcase extends Component {
                                             </a>
                                     </h5>
                                     <div className="card-text">
-                                        <p>{ReactHtmlParser(content.amongUsHack.description)}</p>
+                                    <Language.Consumer>
+                                        {({ get }) => (
+                                            <p>{ReactHtmlParser(get(this.content, 'amongUsHack.description'))}</p>
+                                        )}
+                                    </Language.Consumer>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +81,11 @@ export default class Briefcase extends Component {
                                             </a>
                                     </h5>
                                     <div className="card-text">
-                                        <p>{ReactHtmlParser(content.easyGui.description)}</p>
+                                    <Language.Consumer>
+                                        {({ get }) => (
+                                            <p>{ReactHtmlParser(get(this.content, 'easyGui.description'))}</p>
+                                        )}
+                                    </Language.Consumer>
                                     </div>
                                 </div>
                             </div>
@@ -92,10 +99,14 @@ export default class Briefcase extends Component {
                                             <strong>GitHub</strong>
                                             </a>
                                     </h5>
-                                    <div className="card-text">
-                                        <p>{ReactHtmlParser(content.dwap.description1)}</p>
-                                        <p>{ReactHtmlParser(content.dwap.description2)}</p>
-                                    </div>
+                                    <Language.Consumer>
+                                        {({ get }) => (
+                                            <div className="card-text">
+                                                <p>{ReactHtmlParser(get(this.content, 'dwap.description1'))}</p>
+                                                <p>{ReactHtmlParser(get(this.content, 'dwap.description2'))}</p>
+                                            </div>
+                                        )}
+                                    </Language.Consumer>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +120,11 @@ export default class Briefcase extends Component {
                                             </a>
                                     </h5>
                                     <div className="card-text">
-                                        <p>{ReactHtmlParser(content.djax.description)}</p>
+                                    <Language.Consumer>
+                                        {({ get }) => (
+                                            <p>{ReactHtmlParser(get(this.content, 'djax.description'))}</p>
+                                        )}
+                                    </Language.Consumer>
                                     </div>
                                 </div>
                             </div>

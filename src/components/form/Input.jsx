@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Language } from '@react-lang/language'
 
 
 export default class Input extends Component {
@@ -26,16 +27,23 @@ export default class Input extends Component {
     }
 
     render() {
-        var {lang, ...other} = this.props;
         return(
             <div className="form-group">
                 <label for={this.props.id}>{this.props.label}</label>
-                <input type={this.props.type} className="form-control" id={this.props.id} placeholder={this.props.placeholder} onChange={this.handleOnChange} {...other} />
+                <input type={this.props.type} className="form-control" id={this.props.id} placeholder={this.props.placeholder} onChange={this.handleOnChange} {...this.props} />
                 <div class="invalid-feedback">
-                    {content.invalidMessage}
+                    <Language.Consumer>
+                        {({ get }) => (
+                            <span>{get(this.content, 'invalidMessage')}</span>
+                        )}
+                    </Language.Consumer>
                 </div>
                 <div class="valid-feedback">
-                    {content.validMessage}
+                    <Language.Consumer>
+                        {({ get }) => (
+                            <span>{get(this.content, 'validMessage')}</span>
+                        )}
+                    </Language.Consumer>
                 </div>
             </div>
         );

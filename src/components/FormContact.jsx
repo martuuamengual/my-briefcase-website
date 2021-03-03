@@ -4,7 +4,7 @@ import Form from 'src/components/form/Form'
 import { Formik } from 'formik';
 import Button from './form/Button';
 import ReactHtmlParser from 'html-react-parser';
-import LanguageUtils from "src/utils/LanguageUtils";
+import { Language } from '@react-lang/language'
 
 
 export default class FormContact extends Component {
@@ -40,10 +40,8 @@ export default class FormContact extends Component {
     }
 
     getInitialValues() {
-        let content = LanguageUtils.getContent(this.props.lang, this.content)
         return {
-            name: '',
-            content: content
+            name: ''
         }
     }
 
@@ -61,15 +59,27 @@ export default class FormContact extends Component {
                 /* and other goodies */
                 }) => (
                 <section>
-                    <Form lang={this.props.lang} onSubmit={handleSubmit}>
-                        <Input type="text" name="name" id="name" label={values.content.form.name} placeholder="John Feneck" onChange={handleChange} required />
+                    <Form onSubmit={handleSubmit}>
+                        <Language.Consumer>
+                            {({ get }) => (
+                                <Input type="text" name="name" id="name" label={get(this.content, 'form.name')} placeholder="John Feneck" onChange={handleChange} required />
+                            )}
+                        </Language.Consumer>
                         <Button type="submit" />
                     </Form>
                     <p className="text-center hidden" ref={this.thanksContainer}>
-                        {values.content.thanksMessage}
+                        <Language.Consumer>
+                            {({ get }) => (
+                                <span>{get(this.content, 'thanksMessage')}</span>
+                            )}
+                        </Language.Consumer>
                     </p>
                     <p className="error-message text-center hidden" ref={this.errorContainer}>
-                        {ReactHtmlParser(values.content.errorMessage)}
+                        <Language.Consumer>
+                            {({ get }) => (
+                                <span>{ReactHtmlParser(get(this.content, 'errorMessage'))}</span>
+                            )}
+                        </Language.Consumer>
                     </p>
                 </section>
                 )}

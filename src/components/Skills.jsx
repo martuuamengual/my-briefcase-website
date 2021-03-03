@@ -1,14 +1,27 @@
 import React, { Component } from "react";
 import ProgressBar from 'src/components/ProgressBar';
-
+import { Language } from '@react-lang/language'
 
 export default class Skills extends Component {
+
+    content = {
+        es: {
+            title: 'HABILIDADES'
+        },
+        en: {
+            title: 'SKILLS'
+        }
+    }
 
     render() {
         return(
             <section className="skills">
                 <div className="container mt-120px">
-                    <div className="mtu-title">SKILLS</div>
+                    <Language.Consumer>
+                        {({ get }) => (
+                            <div className="mtu-title">{get(this.content, 'title')}</div>
+                        )}
+                    </Language.Consumer>
                     <div className="row justify-content-center align-items-center">
                         <div className="col-xl">
                             <ProgressBar value="80" text="GIT"></ProgressBar>
