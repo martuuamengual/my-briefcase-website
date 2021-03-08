@@ -3,12 +3,6 @@ import React, { Component } from "react";
 
 export default class Form extends Component {
 
-    constructor(props) {
-        super(props);
-        this.formRef = React.createRef();
-    }
-
-
     handleSubmit = (event) => {
         event.preventDefault();
         event.stopPropagation();
@@ -18,9 +12,12 @@ export default class Form extends Component {
     }
     
     render() {
+
+        const { onSubmit, children, ...others } = this.props
+
         return(
-            <form onSubmit={this.handleSubmit} ref={this.formRef} noValidate>
-                {this.props.children}
+            <form onSubmit={this.handleSubmit} {...others}>
+                {children}
             </form>
         );
     }

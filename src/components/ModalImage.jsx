@@ -4,9 +4,10 @@ import 'src/styles/ModalImage.sass'
 
 export default class ModalImage extends Component {
 
-    handleClick = (data) => {
+    handleClick = (event) => {
+        event.preventDefault();
         //let modal = event.target.href;
-        let a = data.target.parentElement;
+        let a = event.target.parentElement;
         let modal = a.parentElement;
 
         

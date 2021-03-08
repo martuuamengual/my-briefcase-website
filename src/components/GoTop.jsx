@@ -13,21 +13,48 @@ export default class GoTop extends Component {
     }
 
     componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll);
+        $(this.buttonRef.current).fadeOut(1)
+        this.setFooterObserver()
+        this.setEducationObserver()
     }
 
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll)
+    setFooterObserver() {
+        let thresholds = []
+        for (let i=0; i <= 1; i += 0.05) {
+            thresholds.push(i)
+        }
+
+        const intersectionOptions = {
+            root: null,  // use the viewport
+            rootMargin: '0px',
+            threshold: thresholds
+        }
+        let observer = new IntersectionObserver(this.intersectionFooterCallback, intersectionOptions);
+        let target = document.querySelector('footer')
+        observer.observe(target);
     }
 
-    handleScroll = () => {
-        this.animate();
-        this.checkNewPositionOnFooterInViewPort()
-        setTimeout(() => {
-            if(JqueryUtils.isScrollInBottom()) {
-                $(this.buttonRef.current).css('bottom', 90 + 'px')
-            }
-        }, 1000)
+    setEducationObserver() {
+        const intersectionOptions = {
+            root: null,  // use the viewport
+            rootMargin: '0px',
+            threshold: [0, 0.1, 0.2, 1]
+        }
+        let observer = new IntersectionObserver(this.intersectionEducationCallback, intersectionOptions);
+        let target = document.querySelector('section[class="education"]')
+        observer.observe(target);
+    }
+
+    intersectionEducationCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            this.animate(entry);
+        });
+    }
+
+    intersectionFooterCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            this.checkNewPositionOnFooterInViewPort(entry);
+        });
     }
 
     handleClick = () => {
@@ -35,26 +62,47 @@ export default class GoTop extends Component {
         body.scrollIntoView({behavior: 'smooth'})
     }
 
-    animate() {
-        if (this.checkIfTop()) {
+    animate(entry) {
+        let experience = $('section[class="experience"]')
+        let offsetExperience = experience.position().top - entry.target.offsetTop + entry.target.offsetHeight
+        let goThroughExperience = (window.pageYOffset > offsetExperience)
+
+        if (!entry.isIntersecting && !goThroughExperience) {
             $(this.buttonRef.current).fadeOut(200)
         } else {
             $(this.buttonRef.current).fadeIn(200)
         }
     }
 
-    checkNewPositionOnFooterInViewPort() {
+    checkNewPositionOnFooterInViewPort(entry) {
         let footer = $('footer')
         let button = $(this.buttonRef.current)
-        if (JqueryUtils.isInViewport(footer)) {
-            let offset = 60
-            let offsetTop = button.offset().top - footer.offset().top
-            let position = offsetTop + offset
+        if (!entry.isIntersecting) {
+            button.css('bottom', '10px')
+        } else {
+            let offset = 60 // height aprox of button
+            let offsetTop = 0
+            let bottom = parseInt(button.css('bottom').replace('px', ''))
+            let position = 0
+
+            if (footer.offset().top < button.offset().top) {
+                // scrolling to bottom
+                offsetTop = button.offset().top - footer.offset().top
+                if (offsetTop > 0) {
+                    position = bottom + offsetTop + offset
+                }
+            } else {
+                // scrolling to top
+                offsetTop = footer.offset().top - button.offset().top
+                if (offsetTop > 0) {
+                    position = bottom - offsetTop + offset
+                }
+            }
+            
+
             if (position > 0) {
                 button.css('bottom', position + 'px')
             }
-        } else {
-            button.css('bottom', '10px')
         }
     }
 

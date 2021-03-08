@@ -1,33 +1,20 @@
 import { Component } from "react";
-import StringUtils from 'src/utils/StringUtils'
+import FormUtils from 'src/utils/FormUtils'
 
 export default class NavBarButton extends Component {
 
-    
-    state = {
-        className: 'col-xl-auto mt-3 mt-xl-0',
-        href: '#',
-        text: 'NO_TEXT'
-    }
-    
-    constructor(props) {
-        super(props);
-        if (StringUtils.isValidString(props.className)) {
-            this.state.className += ' ' + props.className;
-        }
-        if (StringUtils.isValidString(props.href)) {
-            this.state.href = props.href;
-        }
-        if (StringUtils.isValidString(props.text)) {
-            this.state.text = props.text;
-        }
-    }
 
     render() {
+
+        const { className, onClick, text, ...others } = this.props
+
         return (
-            <div className={this.state.className}>
-                <a onClick={this.props.onClick} href={this.state.href} className="mtu-nav-btn">
-                    <span>{this.state.text}</span>
+            <div className="col-xl-auto mt-3 mt-xl-0">
+                <a onClick={onClick} className={FormUtils.mergeClassName({
+                    default: 'mtu-nav-btn',
+                    className:  className
+                })} {...others}>
+                    <span>{text}</span>
                 </a>
             </div>
         );
