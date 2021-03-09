@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import { wrapRef } from 'src/utils/wraps/wrapRef'
 
-
-export default class Form extends Component {
+class Form extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -13,12 +13,14 @@ export default class Form extends Component {
     
     render() {
 
-        const { onSubmit, children, ...others } = this.props
+        const { onSubmit, children, forwardedRef, ...others } = this.props
 
         return(
-            <form onSubmit={this.handleSubmit} {...others}>
+            <form onSubmit={this.handleSubmit} ref={forwardedRef} {...others}>
                 {children}
             </form>
         );
     }
 }
+
+export default wrapRef(Form);

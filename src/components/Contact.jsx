@@ -35,33 +35,6 @@ class Contact extends Component {
         })
     }
 
-    validateFormAndShowMessages(isSubmited) {
-
-        let { name } = this.props.form
-        let { email } = this.props.form
-        let { message } = this.props.form
-
-        let $form = $(this.formRef.current)
-        let cssValid = 'is-valid'
-        let cssInvalid = 'is-invalid'
-
-        let data = {
-            name: name, 
-            email: email, 
-            message: message, 
-            $form: $form, 
-            cssValid: cssValid, 
-            cssInvalid: cssInvalid
-        }
-
-        
-        if (StringUtils.areValidFields(name, email, message)) {
-            if (isSubmited) {
-                this.sendMessage()
-            }
-        }
-    }
-
     render() {
         return(
             <section>

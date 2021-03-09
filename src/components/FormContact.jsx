@@ -148,19 +148,26 @@ export default class FormContact extends Component {
             cache: 'no-cache',
             body: formData
         }).then((response) => {
-            response.json().then((data) => {
-                if (data.status === "ok") {
-                    setTimeout(() => {
-                        let $form = $(this.formRef.current);
-                        $form.slideUp(500, () => {
-                            $(this.thanksContainer.current).removeClass('hidden').hide().slideDown(200);
-                        });
-                    }, 1000);
-                } else {
-                    // show error
-                    $(this.errorContainer.current).removeClass('hidden').hide().slideDown(200);
-                }
-            })
+
+            if (response.ok) {
+                return response.json()
+            }
+
+            throw new Error('Something went wrong.');
+        }).then((data) => {
+            if (data.status === "ok") {
+                setTimeout(() => {
+                    let $form = $(this.formRef.current);
+                    console.log($form)
+                    console.log($(this.thanksContainer.current))
+                    $form.slideUp(500, () => {
+                        $(this.thanksContainer.current).removeClass('hidden').hide().slideDown(200);
+                    });
+                }, 1000);
+            } else {
+                // show error
+                $(this.errorContainer.current).removeClass('hidden').hide().slideDown(200);
+            }
         }).catch((error) => {
             $(this.errorContainer.current).removeClass('hidden').hide().slideDown(200);
         })

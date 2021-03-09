@@ -96,9 +96,9 @@ export default class Calification extends Component {
     }
 
     animationStars() {
-        setTimeout(function() {
+        setTimeout(() => {
             let ratingContainer = $('.rating-container');
-            ratingContainer.fadeOut(500, function() {
+            ratingContainer.fadeOut(500, () => {
                 $(this.messageRef.current).hide();
                 $(this.thanksMessageRef.current).removeClass('hidden').hide().show();
                 setTimeout(function() {
