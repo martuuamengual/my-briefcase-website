@@ -22,7 +22,7 @@ export default class ModalImage extends Component {
 
     render() {
         return (
-            <section className="mtu-modal-section">
+            <div className="mtu-modal-section">
                 <div id={'modal-image-' + this.props.id} className="mtu-modal">
                     <a id={this.props['id-btn']} href="#" onClick={this.handleClick}>
                         <span>{this.props.text}</span>
@@ -33,7 +33,7 @@ export default class ModalImage extends Component {
                         <div id="caption">{this.props.alt}</div>
                     </div>
                 </div>
-            </section>
+            </div>
         );
     }
 }
