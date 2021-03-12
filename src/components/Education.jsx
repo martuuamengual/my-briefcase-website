@@ -46,9 +46,9 @@ export default class Education extends Component {
                     <section className="education">
                         <div className="container mt-120px">
                             <div className="mtu-title">{get(this.content, 'title')}</div>
-                            <div className="row justify-content-center align-items-center mtu-education">
-                                <div className="col-xl">
-                                    <div className="card" style={{ height: "214px" }}>
+                            <div className="row equal">
+                                <div className="col-xl d-flex">
+                                    <div className="card flex-fill">
                                         <div className="card-body">
                                             <h5 className="card-title mtu-card-title">2005-2010</h5>
                                             <p className="card-text mtu-card-text">
@@ -61,8 +61,8 @@ export default class Education extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-xl mt-xl-0 mt-5">
-                                    <div className="card">
+                                <div className="col-xl mt-xl-0 mt-5 d-flex">
+                                    <div className="card flex-fill">
                                         <div className="card-body">
                                             <h5 className="card-title mtu-card-title">2011-2017</h5>
                                             <p className="card-text mtu-card-text">
@@ -75,8 +75,8 @@ export default class Education extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-xl mt-xl-0 mt-5">
-                                    <div className="card">
+                                <div className="col-xl mt-xl-0 mt-5 d-flex">
+                                    <div className="card flex-fill">
                                         <div className="card-body">
                                             <h5 className="card-title mtu-card-title">2017-2021</h5>
                                             <p className="card-text mtu-card-text">

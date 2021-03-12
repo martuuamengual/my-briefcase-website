@@ -5,6 +5,7 @@ import location from 'src/images/location.svg'
 import ModalImage from './ModalImage';
 import { Language } from '@react-lang/language'
 import $ from 'jquery';
+import diploma from 'src/images/diploma.jpg'
 
 export default class Intro extends Component {
 
@@ -12,7 +13,22 @@ export default class Intro extends Component {
         name: 'MARTIN',
         surname: 'AMENGUAL',
         location: 'Buenos aires, Argentina'
-    };
+    }
+
+    content = {
+        en: {
+            modal: {
+                text: '(see image)',
+                alt: 'Diploma 4th place in the national league of robotics awarded by the Inst. La Salle florida'
+            }
+        },
+        es: {
+            modal: {
+                text: '(ver imagen)',
+                alt: 'Diploma 4to puesto en la liga nacional de robotica otorgado por el Inst. La Salle florida'
+            }
+        }
+    }
 
     handleGoToContact = (event) => {
         event.preventDefault();
@@ -34,6 +50,20 @@ export default class Intro extends Component {
         }
     }
 
+    getModalDiploma() {
+        return (
+            <Language.Consumer>
+                {({ get }) => (
+                    <ModalImage 
+                        id="modal-myImg" id-btn="myImg1" text={get(this.content, 'modal.text')} 
+                        src={diploma} 
+                        alt={get(this.content, 'modal.alt')}
+                    />
+                )}
+            </Language.Consumer>
+        )
+    }
+
     getDescription(lang) {
         if (lang === 'es') {
             return (
@@ -41,10 +71,7 @@ export default class Intro extends Component {
                     Hola, bienvenid@ me llamo Martin tengo 22 años 
                     y soy desarrollador web. En la secundaria me especialicé en <strong>electrónica</strong>,
                     ahí desarrollé y programé algunos robots y obtuvimos el 4to puesto
-                    en <strong>laberinto</strong> en la <strong>liga nacional de robotica</strong> <ModalImage 
-                    id="modal-myImg" id-btn="myImg1" text="(ver imagen)" 
-                    src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" 
-                    alt="Example text2"></ModalImage>. 
+                    en <strong>laberinto</strong> en la <strong>liga nacional de robotica</strong> {this.getModalDiploma()}. 
                     Actualmente me encuentro aprendiendo nuevas tecnologías. Me considero una persona 
                     amable, cálida, aplicada y con muchas ganas de seguir aprendiendo. Si quieres me puedes <a href="#" onClick={this.handleGoToContact}><strong>contactar</strong></a> 😊
                 </p>
@@ -54,10 +81,7 @@ export default class Intro extends Component {
                 <p style={{ marginBottom: '0' }}>
                     Hi, welcome my name is Martin I am 22 years old and I am a web developer. In 
                     high school I specialized in <strong>electronics</strong>, there I developed and programmed 
-                    some robots and we obtained the 4th place in <strong>labyrinth</strong> in the <strong>national league of robotics</strong> <ModalImage 
-                    id="modal-myImg" id-btn="myImg1" text="(see image)" 
-                    src="https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png" 
-                    alt="Example text2"></ModalImage>. 
+                    some robots and we obtained the 4th place in <strong>labyrinth</strong> in the <strong>national league of robotics</strong> {this.getModalDiploma()}. 
                     I am currently learning new technologies. I consider myself a kind, warm, applied person and eager to continue learning. If you want you can <a href="#" onClick={this.handleGoToContact}><strong>contact me</strong></a> 😊
                 </p>
             );

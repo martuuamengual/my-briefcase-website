@@ -1,5 +1,4 @@
 import { Component } from "react";
-import 'src/styles/Hobbies.sass';
 import ReactHtmlParser from 'html-react-parser';
 import { Language } from '@react-lang/language'
 
@@ -39,9 +38,9 @@ export default class Hobbies extends Component {
             <section className="hobbies">
                 <div className="container mt-120px">
                     <div className="mtu-title">HOBBIES</div>
-                    <div className="row justify-content-center align-items-center mtu-card">
+                    <div className="row justify-content-center align-items-center">
                         <div className="col-xl-1"></div>
-                        <div className="col-xl-8">
+                        <div className="col-xl-8 mb-4">
                             <div className="card">
                                 <div className="card-body">
                                     <h5 className="card-title mtu-card-title mtu-card-title">
@@ -64,7 +63,7 @@ export default class Hobbies extends Component {
                     </div>
                     <div className="row justify-content-center align-items-center mtu-card">
                         <div className="col-xl-1"></div>
-                        <div className="col-xl-8">
+                        <div className="col-xl-8 mb-4">
                             <div className="card">
                                 <div className="card-body">
                                     <Language.Consumer>
@@ -88,7 +87,7 @@ export default class Hobbies extends Component {
                     </div>
                     <div className="row justify-content-center align-items-center">
                         <div className="col-xl-1"></div>
-                        <div className="col-xl-8">
+                        <div className="col-xl-8 mb-4">
                             <div className="card">
                                 <div className="card-body">
                                     <Language.Consumer>

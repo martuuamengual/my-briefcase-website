@@ -48,9 +48,9 @@ export default class Experience extends Component {
                             <div className="mtu-title">{get(this.content, 'title')}</div>
                         )}
                     </Language.Consumer>
-                    <div className="row justify-content-center align-items-center">
-                        <div className="col-xl">
-                            <div className="card" style={{ height: '375px' }}>
+                    <div className="row equal">
+                        <div className="col-xl-4 d-flex">
+                            <div className="card flex-fill">
                                 <div className="card-body">
                                     <h5 className="card-title mtu-card-title">2011-2017</h5>
                                     <p className="card-text mtu-card-text">
@@ -71,8 +71,8 @@ export default class Experience extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-xl mt-xl-0 mt-5">
-                            <div className="card" style={{ height: '375px' }}>
+                        <div className="col-xl-4 mt-xl-0 mt-5 d-flex">
+                            <div className="card flex-fill">
                                 <div className="card-body">
                                     <h5 className="card-title mtu-card-title">2017-2020</h5>
                                     <p className="card-text mtu-card-text">
@@ -100,8 +100,8 @@ export default class Experience extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-xl mt-xl-0 mt-5">
-                            <div className="card" style={{ height: '375px' }}>
+                        <div className="col-xl-4 mt-xl-0 mt-5 d-flex">
+                            <div className="card flex-fill">
                                 <div className="card-body">
                                     <h5 className="card-title mtu-card-title">2017-2021</h5>
                                     <p className="card-text mtu-card-text">

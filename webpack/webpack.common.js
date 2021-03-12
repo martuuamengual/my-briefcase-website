@@ -35,10 +35,10 @@ module.exports = merge(alias, {
                 use: ['style-loader', 'css-loader', 'sass-loader'],
             },
             {
-                test: /\.(png|jpg|gif)$/,
-                loader: 'file-loader',
+                test: /\.jpg/,
+                loader: "file-loader",
                 options: {
-                    outputPath: 'images',
+                    outputPath: 'dist',
                 },
             },
             {

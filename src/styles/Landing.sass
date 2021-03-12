@@ -9,19 +9,22 @@
     font-weight: bold
 
 .mtu-card-title
+    color: $red
     a
+        display: inline-block
+        margin-top: 1rem
         font-size: 1rem
         color: $gray !important
         img
-            filter: invert(0.4)
             width: 20px
             height: 20px
             margin-left: 3px
             margin-top: -7px
             margin-right: 5px
+            &.atenuate
+                filter: invert(0.4)
     span
         color: $gray
-    color: $red
 
 .mtu-card-text
     color: $gray
