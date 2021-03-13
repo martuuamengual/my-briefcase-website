@@ -11,10 +11,10 @@ export default class Experience extends Component {
                 description: 'Languages ​​I learned'
             },
             secondCard: {
-                li0: 'Mas de 3 años en la empresa',
-                li1: 'Allí aprendí',
-                li2: 'Procesos de revisión de código (Pull requests)',
-                li3: 'Programación de API REST en Java',
+                li0: 'More than 3 years in the company',
+                li1: 'There I learned',
+                li2: 'Code review processes (Pull requests)',
+                li3: 'Development of API REST in Java',
             },
             thirdCard: {
                 title: 'Autodidact',
@@ -27,10 +27,10 @@ export default class Experience extends Component {
                 description: 'Lenguajes que aprendí'
             },
             secondCard: {
-                li0: 'More than 3 years in the company',
-                li1: 'There I learned',
-                li2: 'Code review processes (Pull requests)',
-                li3: 'Development of API REST in Java',
+                li0: 'Mas de 3 años en la empresa',
+                li1: 'Allí aprendí',
+                li2: 'Procesos de revisión de código (Pull requests)',
+                li3: 'Programación de API REST en Java',
             },
             thirdCard: {
                 title: 'Autodidacta',
