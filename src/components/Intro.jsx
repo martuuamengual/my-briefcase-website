@@ -17,12 +17,14 @@ export default class Intro extends Component {
 
     content = {
         en: {
+            read: 'Read',
             modal: {
                 text: '(see image)',
                 alt: 'Diploma 4th place in the national league of robotics awarded by the Inst. La Salle florida'
             }
         },
         es: {
+            read: 'de Lectura',
             modal: {
                 text: '(ver imagen)',
                 alt: 'Diploma 4to puesto en la liga nacional de robotica otorgado por el Inst. La Salle florida'
@@ -113,7 +115,11 @@ export default class Intro extends Component {
                             </a>
                             <span className="d-block mt-2">Fullstack Developer</span>
                             <span className="d-block mt-2">Semi-Senior/Senior</span>
-                            <span className="d-block mt-2">(Current-Job) Not-Employed</span>
+                            <Language.Consumer>
+                                {({ get }) => (
+                                    <span className="d-block mt-2" style={{ color: 'rgb(180,180,180)' }}>~ 4 min {get(this.content, 'read')}</span>
+                                )}
+                            </Language.Consumer>
                         </div>
                         <div className="col-xl">
                         </div>
