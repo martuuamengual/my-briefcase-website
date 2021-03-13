@@ -97,13 +97,13 @@ export default class NavBar extends Component {
                                 <Language.Consumer>
                                     {({ get }) => (
                                         <div className="row">
-                                            <NavBarButton onClick={this.handleIntro} href="#" text='Intro'></NavBarButton>
-                                            <NavBarButton onClick={this.handleEducation} href="#" text={get(this.content, 'education')}></NavBarButton>
-                                            <NavBarButton onClick={this.handleExperience} href="#" text={get(this.content, 'experience')}></NavBarButton>
-                                            <NavBarButton onClick={this.handleSkills} href="#" text={get(this.content, 'skills')}></NavBarButton>
-                                            <NavBarButton onClick={this.handleHobbys} href="#" text={get(this.content, 'hobbies')}></NavBarButton>
-                                            <NavBarButton onClick={this.handleBriefcase} href="#" text={get(this.content, 'briefcase')}></NavBarButton>
-                                            <NavBarButton onClick={this.handleContact} className="mb-2 mb-md-0" href="#" text={get(this.content, 'contact')}></NavBarButton>
+                                            <NavBarButton onClick={this.handleIntro} text='Intro'></NavBarButton>
+                                            <NavBarButton onClick={this.handleEducation} text={get(this.content, 'education')}></NavBarButton>
+                                            <NavBarButton onClick={this.handleExperience} text={get(this.content, 'experience')}></NavBarButton>
+                                            <NavBarButton onClick={this.handleSkills} text={get(this.content, 'skills')}></NavBarButton>
+                                            <NavBarButton onClick={this.handleHobbys} text={get(this.content, 'hobbies')}></NavBarButton>
+                                            <NavBarButton onClick={this.handleBriefcase} text={get(this.content, 'briefcase')}></NavBarButton>
+                                            <NavBarButton onClick={this.handleContact} className="mb-2 mb-md-0" text={get(this.content, 'contact')}></NavBarButton>
                                         </div>
                                     )}
                                 </Language.Consumer>

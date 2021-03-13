@@ -10,12 +10,12 @@ export default class NavBarButton extends Component {
 
         return (
             <div className="col-xl-auto mt-3 mt-xl-0">
-                <a onClick={onClick} className={FormUtils.mergeClassName({
+                <button onClick={onClick} className={FormUtils.mergeClassName({
                     default: 'mtu-nav-btn',
                     className:  className
                 })} {...others}>
                     <span>{text}</span>
-                </a>
+                </button>
             </div>
         );
     }

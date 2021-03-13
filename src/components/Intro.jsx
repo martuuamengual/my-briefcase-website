@@ -69,14 +69,16 @@ export default class Intro extends Component {
     getDescription(lang) {
         if (lang === 'es') {
             return (
-                <p style={{ marginBottom: '0' }}>
-                    Hola, bienvenid@ me llamo Martin tengo 22 años 
-                    y soy desarrollador web. En la secundaria me especialicé en <strong>electrónica</strong>,
-                    ahí desarrollé y programé algunos robots y obtuvimos el 4to puesto
-                    en <strong>laberinto</strong> en la <strong>liga nacional de robotica</strong> {this.getModalDiploma()}. 
-                    Actualmente me encuentro aprendiendo nuevas tecnologías. Me considero una persona 
-                    amable, cálida, aplicada y con muchas ganas de seguir aprendiendo. Si quieres me puedes <a href="#" onClick={this.handleGoToContact}><strong>contactar</strong></a> 😊
-                </p>
+                <span>
+                    <p style={{ marginBottom: '0' }}>
+                        Hola, bienvenid@ me llamo Martin tengo 22 años 
+                        y soy desarrollador web. En la secundaria me especialicé en <strong>electrónica</strong>,
+                        ahí desarrollé y programé algunos robots y obtuvimos el 4to puesto
+                        en <strong>laberinto</strong> en la <strong>liga nacional de robotica</strong> {this.getModalDiploma()}. 
+                        Actualmente me encuentro aprendiendo nuevas tecnologías. Me considero una persona 
+                        amable, cálida, aplicada y con muchas ganas de seguir aprendiendo. Si quieres me puedes <a href="#" onClick={this.handleGoToContact}><strong>contactar</strong></a> 😊
+                    </p>
+                </span>
             );
         } else {
             return (

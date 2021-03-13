@@ -6,7 +6,7 @@ export default class ModalImage extends Component {
 
     handleClick = (event) => {
         event.preventDefault();
-        //let modal = event.target.href;
+        
         let a = event.target.parentElement;
         let modal = a.parentElement;
 
@@ -22,18 +22,18 @@ export default class ModalImage extends Component {
 
     render() {
         return (
-            <div className="mtu-modal-section">
-                <div id={'modal-image-' + this.props.id} className="mtu-modal">
+            <span className="mtu-modal-section">
+                <span id={'modal-image-' + this.props.id} className="mtu-modal">
                     <a id={this.props['id-btn']} href="#" onClick={this.handleClick}>
                         <span>{this.props.text}</span>
                     </a>
-                    <div className="mtu-modal-content">
+                    <span className="mtu-modal-content">
                         <span className="close">&times;</span>
                         <img className="modal-image" src={this.props.src} id="img01" />
-                        <div id="caption">{this.props.alt}</div>
-                    </div>
-                </div>
-            </div>
+                        <span id="caption">{this.props.alt}</span>
+                    </span>
+                </span>
+            </span>
         );
     }
 }
