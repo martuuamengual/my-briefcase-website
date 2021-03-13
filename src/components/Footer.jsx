@@ -3,6 +3,7 @@ import 'src/styles/Footer.sass'
 import { Language } from '@react-lang/language'
 import { ReactComponent as Linkedin } from 'src/images/linkedin.svg'
 import { ReactComponent as GitHub } from 'src/images/GitHub.svg'
+import { ReactComponent as FileDownload } from 'src/images/FileDownload.svg'
 
 
 export default class Footer extends Component {
@@ -51,6 +52,9 @@ export default class Footer extends Component {
                             </a>
                             <a className="github" href="https://github.com/martuuamengual" target="_blank">
                                 <GitHub />
+                            </a>
+                            <a className="download" href="https://docs.google.com/document/d/1w4LJKD44ESKjRwefTvLgeuOaj88SKsM_HoTqf1Lktd8/edit?usp=sharing" target="_blank">
+                                <FileDownload />
                             </a>
                         </div>
                         <div className="col-xl-6">
