@@ -5,6 +5,9 @@ const webpack = require('webpack');
 const alias = require('./webpack.alias');
 const { merge } = require('webpack-merge');
 
+const CopyPlugin = require('copy-webpack-plugin');
+const CompressionPlugin = require("compression-webpack-plugin");
+
 
 module.exports = merge(alias, {
   target: 'web', //we need this line because webpack 5 with webpack-web-server v3 has a bug with hot reload.
@@ -22,6 +25,15 @@ module.exports = merge(alias, {
       new webpack.ProvidePlugin({
           "React": "react",
       }),
+      new CopyPlugin({
+        patterns: [
+            { from: "./public", to: "public" },
+            { from: "./src/robots.txt", to: "robots.txt" },
+        ],
+      }),
+      new CompressionPlugin({
+          minRatio: 1 // this means that all files gziped that are less in byte than current file is compressed.
+      }),
   ],
   module: {
         rules: [
@@ -35,11 +47,15 @@ module.exports = merge(alias, {
                 use: ['style-loader', 'css-loader', 'sass-loader'],
             },
             {
-                test: /\.jpg/,
-                loader: "file-loader",
-                options: {
-                    outputPath: 'dist',
-                },
+                test: /\.jpg$/,
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: {
+                            outputPath: 'dist',
+                        },
+                    }
+                ]
             },
             {
                 test: /\.svg$/,

@@ -1,17 +1,24 @@
 const path = require('path');
 const common = require('./webpack.common');
 const { merge } = require('webpack-merge');
-const webpack = require('webpack');
 
 // root path for this project
 const ROOT = path.join(__dirname, '../');
 
+/* TODO: MAKE IN FUTURE ENV VARIABLES IF NEEDED */
+/*
+const webpack = require('webpack');
 var dotenvDev = require('dotenv').config({path: path.join(ROOT, '.env.dev')});
 var dotenvCommon = require('dotenv').config({path: path.join(ROOT, '.env.common')});
 
 var env = require('./webpack.helper').merge(dotenvCommon.parsed, dotenvDev.parsed);
+*/
 
-const CopyPlugin = require('copy-webpack-plugin');
+/*plugins: [
+    new webpack.DefinePlugin({
+        'process.env': JSON.stringify(env)
+    })
+],*/
 
 module.exports = merge(common,
     {
@@ -24,16 +31,11 @@ module.exports = merge(common,
             historyApiFallback: true,
             port: 3000,
         },
-        plugins: [
-            new webpack.DefinePlugin({
-                'process.env': JSON.stringify(env)
-            }),
-            new CopyPlugin({
-                patterns: [
-                    { from: "./public", to: "public" },
-                ],
-            }),
-        ],
+        performance: {
+            hints: 'warning',
+            maxEntrypointSize: 512000,
+            maxAssetSize: 512000
+        },
         output: {
             filename: 'js/[name].bundle.js',
             path: path.join(ROOT, 'src'),

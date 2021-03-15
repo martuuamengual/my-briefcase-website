@@ -5,14 +5,12 @@
   "dependencies": {
     "@react-lang/language": "^1.0.3",
     "@reduxjs/toolkit": "^1.5.0",
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.3",
-    "@testing-library/user-event": "^12.6.0",
     "bootstrap": "^4.5.3",
     "chalk": "^4.1.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-static-gzip": "^2.1.1",
     "express-validator": "^6.10.0",
     "formik": "^2.2.6",
     "html-react-parser": "^1.2.4",
@@ -38,7 +36,9 @@
     "build": "webpack --config webpack/webpack.prod.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "webpack --config webpack/webpack.prod.js"
+    "heroku-postbuild": "webpack --config webpack/webpack.prod.js",
+    "generate-report": "webpack --profile --json=compilation-stats.json",
+    "build-report": "webpack --config webpack/webpack.report.js"
   },
   "eslintConfig": {
     "extends": [
@@ -65,8 +65,12 @@
     "@babel/preset-env": "^7.12.16",
     "@babel/preset-react": "^7.12.13",
     "@svgr/webpack": "^5.4.0",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.0",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
+    "compression-webpack-plugin": "^7.1.2",
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^4.3.0",
     "file-loader": "^6.1.1",
@@ -74,6 +78,7 @@
     "sass-loader": "^10.1.0",
     "style-loader": "^1.3.0",
     "webpack": "^5.22.0",
+    "webpack-bundle-analyzer": "^4.4.0",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.7.3"

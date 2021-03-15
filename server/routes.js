@@ -7,7 +7,10 @@ const { body, validationResult } = require('express-validator');
 
 module.exports = function(app, buildPath) {
     app.get('*', (req, res) => {
-        res.sendFile(path.join(buildPath, 'index.html'));
+        res.setHeader('Content-Encoding', 'gzip')
+        res.setHeader('Content-Type', 'text/html; charset=UTF-8')
+        res.setHeader('Vary', 'Accept-Encoding')
+        res.sendFile(path.join(buildPath, 'index.html.gz'));
     });
 
     app.post(
