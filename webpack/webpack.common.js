@@ -15,17 +15,16 @@ const WebPackHelper = require('./webpack.helper')
 
 /* SECTION: DEFINE ENV FILES */
 
-const dotenvCommon = Dotenv.config({path: path.join(__dirname, '.env.common')});
+const ROOT = path.join(__dirname, '../')
+
+let dotenvCommon = require('dotenv').config({path: path.join(ROOT, '.env.common')});
 let env = undefined;
 
 if (process.env.NODE_ENV === 'production') {
     env = process.env;
 } else {
-    env = Dotenv.config({path: path.join(__dirname, '.env.dev')});
+    env = Dotenv.config({path: path.join(ROOT, '.env.dev')});
 }
-
-console.log("common: " + dotenvCommon.parsed)
-console.log("env: " + env)
 
 const mergedEnv = WebPackHelper.merge(dotenvCommon.parsed, env);
 
