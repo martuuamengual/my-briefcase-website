@@ -27,6 +27,9 @@ if (process.env.NODE_ENV === 'production') {
     env = Dotenv.config({path: path.join(ROOT, '.env.dev')});
 }
 
+console.log("common: " + dotenvCommon.parsed)
+console.log("env: " + env)
+
 const mergedEnv = WebPackHelper.merge(dotenvCommon.parsed, env);
 
 /* SECTION: DEFINE ENV FILES */
