@@ -136,10 +136,6 @@ export default class FormContact extends Component {
 
     sendMessage(values, { setSubmitting }) {
 
-        setTimeout(() => {
-            setSubmitting(false)
-        }, 400)
-
         var formData = new FormData();
         formData.append('name', values.name);
         formData.append('email', values.email);
@@ -158,18 +154,19 @@ export default class FormContact extends Component {
         }).then((data) => {
             if (data.status === "ok") {
                 setTimeout(() => {
+                    setSubmitting(false)
                     let $form = $(this.formRef.current);
-                    console.log($form)
-                    console.log($(this.thanksContainer.current))
                     $form.slideUp(500, () => {
                         $(this.thanksContainer.current).removeClass('hidden').hide().slideDown(200);
                     });
                 }, 1000);
             } else {
                 // show error
+                setSubmitting(false)
                 $(this.errorContainer.current).removeClass('hidden').hide().slideDown(200);
             }
         }).catch((error) => {
+            setSubmitting(false)
             $(this.errorContainer.current).removeClass('hidden').hide().slideDown(200);
         })
     }
