@@ -15,6 +15,9 @@ const WebPackHelper = require('./webpack.helper')
 
 /* SECTION: DEFINE ENV FILES */
 
+console.log(path.join('./.env.common'))
+console.log(path.join(__dirname))
+
 const dotenvCommon = Dotenv.config({path: path.join('./.env.common')});
 let env = undefined;
 
