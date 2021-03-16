@@ -7,6 +7,7 @@ import Button from './form/Button';
 import ReactHtmlParser from 'html-react-parser';
 import { Language } from '@react-lang/language'
 import $ from 'jquery';
+import UrlUtils from 'src/utils/UrlUtils'
 
 
 export default class FormContact extends Component {
@@ -143,7 +144,7 @@ export default class FormContact extends Component {
         formData.append('name', values.name);
         formData.append('email', values.email);
         formData.append('message', values.message);
-        fetch('http://localhost:8080/api/send-message', {
+        fetch(UrlUtils.getCurrentUrl() + '/api/send-message', {
             method: 'POST',
             cache: 'no-cache',
             body: formData

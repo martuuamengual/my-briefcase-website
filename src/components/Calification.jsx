@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import 'src/styles/Calification.sass';
 import $ from 'jquery';
 import { Language } from '@react-lang/language'
+import UrlUtils from 'src/utils/UrlUtils'
 
 
 export default class Calification extends Component {
@@ -30,7 +31,7 @@ export default class Calification extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:8080/api/calification/check', {
+        fetch(UrlUtils.getCurrentUrl() + '/api/calification/check', {
             method: 'POST',
             cache: 'no-cache'
         }).then((response) => {
@@ -79,7 +80,7 @@ export default class Calification extends Component {
         });
 
 
-        fetch('http://localhost:8080/api/calification/set', {
+        fetch(UrlUtils.getCurrentUrl() + '/api/calification/set', {
             method: 'PUT',
             cache: 'no-cache',
             headers: {

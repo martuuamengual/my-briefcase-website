@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import 'src/styles/Contact.sass'
-import $ from 'jquery';
-import StringUtils from "src/utils/StringUtils";
 import FormContact from "./FormContact";
 import { Language } from '@react-lang/language'
+import UrlUtils from 'src/utils/UrlUtils'
 
 class Contact extends Component {
 
@@ -21,7 +20,7 @@ class Contact extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:8080/api/contact/check', {
+        fetch(UrlUtils.getCurrentUrl() + '/api/contact/check', {
             method: 'POST',
             cache: 'no-cache'
         }).then((response) => {

@@ -14,7 +14,7 @@ const WebPackHelper = require('./webpack.helper')
 const dotenvCommon = Dotenv.config({path: path.join(ROOT, '.env.common')});
 let env = undefined;
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'production') {
     env = process.env;
 } else {
     env = Dotenv.config({path: path.join(ROOT, '.env.dev')});
