@@ -6,6 +6,7 @@ import ModalImage from './ModalImage';
 import { Language } from '@react-lang/language'
 import $ from 'jquery';
 import diploma from 'src/images/diploma.jpg'
+import fotoPerfil from 'src/images/FotoPerfil.jpg'
 
 export default class Intro extends Component {
 
@@ -101,7 +102,9 @@ export default class Intro extends Component {
                             <span className="mtu-intro-name">{this.state.name}</span>
                         </div>
                         <div className="col-xl-offset">
-                            <div className="mtu-intro-foto shadow"></div>
+                            <div className="mtu-intro-foto shadow">
+                                <img src={fotoPerfil}></img>
+                            </div>
                         </div>
                         <div className="col-xl">
                             <span className="mtu-intro-name">{this.state.surname}</span>
