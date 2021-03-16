@@ -27,7 +27,7 @@ export default class Footer extends Component {
     }
 
     displayCurrentYear() {
-        fetch('http://worldclockapi.com/api/json/utc/now').then((response) => {
+        fetch('https://worldclockapi.com/api/json/utc/now').then((response) => {
 
             if (response.ok) {
                 return response.json()

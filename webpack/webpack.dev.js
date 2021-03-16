@@ -5,21 +5,6 @@ const { merge } = require('webpack-merge');
 // root path for this project
 const ROOT = path.join(__dirname, '../');
 
-/* TODO: MAKE IN FUTURE ENV VARIABLES IF NEEDED */
-/*
-const webpack = require('webpack');
-var dotenvDev = require('dotenv').config({path: path.join(ROOT, '.env.dev')});
-var dotenvCommon = require('dotenv').config({path: path.join(ROOT, '.env.common')});
-
-var env = require('./webpack.helper').merge(dotenvCommon.parsed, dotenvDev.parsed);
-*/
-
-/*plugins: [
-    new webpack.DefinePlugin({
-        'process.env': JSON.stringify(env)
-    })
-],*/
-
 module.exports = merge(common,
     {
         mode: 'development',

@@ -4,7 +4,7 @@ const mailgun = new Mailgun(formData);
 const EnviromentUtils = require('./EnviromentUtils')
 const mg = mailgun.client({
     username: 'api',
-    key: EnviromentUtils.getValue('API_KEY')
+    key: EnviromentUtils.getValue('API_KEY') || 'API-KEY'
 });
 
 class Mail {

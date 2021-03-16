@@ -8,6 +8,20 @@ const { merge } = require('webpack-merge');
 const CopyPlugin = require('copy-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
 
+const Dotenv = require('dotenv')
+const WebPackHelper = require('./webpack.helper')
+
+const dotenvCommon = Dotenv.config({path: path.join(ROOT, '.env.common')});
+let env = undefined;
+
+if (process.env.NODE_ENV !== 'production') {
+    env = process.env;
+} else {
+    env = Dotenv.config({path: path.join(ROOT, '.env.dev')});
+}
+
+const mergedEnv = WebPackHelper.merge(dotenvCommon.parsed, env);
+
 
 module.exports = merge(alias, {
   target: 'web', //we need this line because webpack 5 with webpack-web-server v3 has a bug with hot reload.
@@ -33,6 +47,9 @@ module.exports = merge(alias, {
       }),
       new CompressionPlugin({
           minRatio: 1 // this means that all files gziped that are less in byte than current file is compressed.
+      }),
+      new webpack.DefinePlugin({
+          'process.env': JSON.stringify(mergedEnv)
       }),
   ],
   module: {

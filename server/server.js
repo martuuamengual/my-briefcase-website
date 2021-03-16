@@ -7,12 +7,15 @@ const open = require('open');
 const cors = require('cors');
 const requestIp = require('request-ip');
 const expressStaticGzip = require("express-static-gzip");
+const EnviromentUtils = require('./utils/EnviromentUtils')
 
 const ROOT = path.join(__dirname, '..');
 
 /* SETTING ENV VARIABLES */
-var dotenvDev = require('dotenv').config({path: path.join(ROOT, '.env.dev')});
-var dotenvCommon = require('dotenv').config({path: path.join(ROOT, '.env.common')});
+const dotenvCommon = require('dotenv').config({path: path.join(ROOT, '.env.common')});
+if (!EnviromentUtils.compare('NODE_ENV', 'production')) {
+    const dotenvDev = require('dotenv').config({path: path.join(ROOT, '.env.dev')});
+}
 /* ===================== */
 
 const buildPath = path.join(__dirname, '..', 'build');
