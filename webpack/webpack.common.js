@@ -11,6 +11,13 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const Dotenv = require('dotenv')
 const WebPackHelper = require('./webpack.helper')
 
+
+
+/* SECTION: DEFINE ENV FILES */
+
+// root path for this project
+const ROOT = path.join(__dirname, '../');
+
 const dotenvCommon = Dotenv.config({path: path.join(ROOT, '.env.common')});
 let env = undefined;
 
@@ -21,6 +28,10 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const mergedEnv = WebPackHelper.merge(dotenvCommon.parsed, env);
+
+/* SECTION: DEFINE ENV FILES */
+
+
 
 
 module.exports = merge(alias, {
