@@ -40,10 +40,10 @@ if (fs.existsSync(buildPath)) {
     
     app.use(express.json());
 
-    app.use('/images', express.static(imagesPath));
+    app.use('/images', expressStaticGzip(imagesPath));
     app.use('/js', expressStaticGzip(jsPath));
-    app.use('/public', express.static(publicPath));
-    app.use('/dist', express.static(distPath));
+    app.use('/public', expressStaticGzip(publicPath));
+    app.use('/dist', expressStaticGzip(distPath));
     app.use('/robots.txt', express.static(robotsTxt));
 
     const { logReqMiddleware, notFundMiddelware, serverErrorMiddelware } = require('./utils/RequestUtils')
