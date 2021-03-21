@@ -1,95 +1,53 @@
-const path = require('path');
 const multer  = require('multer')
 const upload = multer()
-const Mail = require('./utils/Mail')
-const db = require('./database')
-const { body, validationResult } = require('express-validator');
+const { body } = require('express-validator');
+const expressStaticGzip = require("express-static-gzip");
+const express = require('express')
+const Path = require('./utils/Path')
+const ContactController = require('./controllers/ContactController')
+const CalificationController = require('./controllers/CalificationController')
 
-module.exports = function(app, buildPath) {
-    app.get('*', (req, res) => {
-        res.setHeader('Content-Encoding', 'gzip')
-        res.setHeader('Content-Type', 'text/html; charset=UTF-8')
-        res.setHeader('Vary', 'Accept-Encoding')
-        res.sendFile(path.join(buildPath, 'index.html.gz'));
-    });
 
-    app.post(
-        '/api/send-message', 
-        upload.none(),
-        body('name').isString().trim().escape(),
-        body('email').isEmail().normalizeEmail(),
-        body('message').isString().trim().escape(),
-        (req, res) => {
-            let errors = validationResult(req)
-            if (errors.isEmpty()) {
-                Mail.sendContactMessage(req.body).then(function (msg) {
-                    const insert = 'insert into Contact (ip) values (?)'
-                    db.run(insert, [req.clientIp], (err) => {
-                        if (err) {
-                            res.json({status: 'error'})
-                        } else {
-                            res.json({status: 'ok'})
-                        }
-                    });
-                }).catch(function (err) {
-                    console.log(err);
-                    res.json({status: 'error'});
-                });
-            } else {
-                res.json({status: 'error'});
-            }
-    });
+class Routes {
 
-    app.post('/api/contact/check', (req, res) => {
-        var sql = "select ip from Contact where ip=?"
-        var params = [req.clientIp]
+    constructor(app) {
+        this.app = app
+        this.statics()
+        this.frontend()
+        this.api()
+    }
 
-        db.all(sql, params, (err, rows) => {
-            if (err) {
-                console.log(err)
-                return;
-            }
-            
-            if (rows.length === 0) {
-                res.json({status: 'allowed'})
-            } else {
-                res.json({status: 'denied'})
-            }
+    statics() {
+        this.app.use('/images', expressStaticGzip(Path.IMAGES_FOLDER_PATH));
+        this.app.use('/js', expressStaticGzip(Path.JS_FOLDER_PATH));
+        this.app.use('/public', expressStaticGzip(Path.PUBLIC_FOLDER_PATH));
+        this.app.use('/dist', expressStaticGzip(Path.DIST_FOLDER_PATH));
+        this.app.use('/robots.txt', express.static(Path.ROBOTSTXT_PATH));
+    }
+
+    frontend() {
+        this.app.get('*', (req, res) => {
+            res.setHeader('Content-Encoding', 'gzip')
+            res.setHeader('Content-Type', 'text/html; charset=UTF-8')
+            res.setHeader('Vary', 'Accept-Encoding')
+            res.sendFile(Path.INDEXHTML_PATH);
         });
-    });
+    }
 
-    app.post('/api/calification/check', (req, res) => {
-        var sql = "select ip from Calification where ip=?"
-        var params = [req.clientIp]
+    api() {
+        this.app.post(
+            '/api/contact/send-message', 
+            upload.none(),
+            body('name').isString().trim().escape(),
+            body('email').isEmail().normalizeEmail(),
+            body('message').isString().trim().escape(), ContactController.SendMessage);
 
-        db.all(sql, params, (err, rows) => {
-            if (err) {
-                console.log(err)
-                return;
-            }
-            
-            if (rows.length === 0) {
-                res.json({status: 'allowed'})
-            } else {
-                res.json({status: 'denied'})
-            }
-        });
-    });
-
-    app.put('/api/calification/set', (req, res) => {
-        const insert = 'insert into Calification (ip) values (?)'
-        let stars = req.body.stars
-        db.run(insert, [req.clientIp], (err) => {
-            if (err) {
-                res.json({status: 'error'})
-            } else {
-                Mail.sendCalificationMessage(stars).then(function (msg) {
-                    res.json({status: 'ok'});
-                }).catch(function (err) {
-                    console.log(err);
-                    res.json({status: 'error'});
-                });
-            }
-        });
-    });
+        this.app.post('/api/contact/check', ContactController.Check);
+    
+        this.app.post('/api/calification/check', CalificationController.Check);
+    
+        this.app.put('/api/calification/set', CalificationController.Set);
+    }
 }
+
+module.exports = Routes

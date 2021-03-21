@@ -1,19 +1,17 @@
 const formData = require('form-data');
 const Mailgun = require('mailgun.js');
 const mailgun = new Mailgun(formData);
-const EnviromentUtils = require('./EnviromentUtils')
+const Enviroment = require('./Enviroment')
 const mg = mailgun.client({
     username: 'api',
-    key: EnviromentUtils.getValue('API_KEY') || 'API-KEY'
+    key: Enviroment.getValue('API_KEY') || 'API-KEY'
 });
 
 class Mail {
-    static checkEnviroment() {
-        if (!EnviromentUtils.compare('NODE_ENV', 'production') && !EnviromentUtils.getBoolean('SEND_EMAIL')) {
-            return true;
-        } else {
-            return false;
-        }
+    static haveToSendEmail() {
+        if (Enviroment.isProd()) return true;
+        if (Enviroment.isDev() && Enviroment.getBoolean('SEND_EMAIL')) return true;
+        return false;
     }
 
     static promise() {
@@ -23,16 +21,15 @@ class Mail {
     }
 
     static sendContactMessage(body) {
-        if (Mail.checkEnviroment()) {
-            return Mail.promise()
-        }
+        if (!Mail.haveToSendEmail()) return Mail.promise()
+
         let name = body.name;
         let email = body.email;
         let message = body.message;
 
-        let text = 'name: ' + name + '\n' + 'email: ' + email + '\n' + 'message: ' + message;
+        let text = `name: ${name} \n email: ${email} \n message: ${message}`
 
-        return mg.messages.create(EnviromentUtils.getValue('DOMAIN'), {
+        return mg.messages.create(Enviroment.getValue('DOMAIN'), {
             from: "CONTACT-CV <info@martuu.amengual.com>",
             to: ["martuu.amengual@gmail.com"],
             subject: "You recive a contact from website cv",
@@ -41,12 +38,11 @@ class Mail {
     }
 
     static sendCalificationMessage(stars) {
-        if (Mail.checkEnviroment()) {
-            return Mail.promise()
-        }
-        let text = 'A user gives you' + stars + ' STARS';
+        if (!Mail.haveToSendEmail()) return Mail.promise()
 
-        return mg.messages.create(EnviromentUtils.getValue('DOMAIN'), {
+        let text = `A user gives you ${stars} STARS`;
+
+        return mg.messages.create(Enviroment.getValue('DOMAIN'), {
             from: "CALIFICATION-CV <info@martuu.amengual.com>",
             to: ["martuu.amengual@gmail.com"],
             subject: "You recive a calification from website cv",

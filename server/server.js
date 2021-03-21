@@ -1,73 +1,70 @@
-const path = require('path');
-const express = require('express');
-const fs = require('fs')
-const app = express();
-const chalk = require('chalk');
-const open = require('open');
-const cors = require('cors');
-const requestIp = require('request-ip');
-const expressStaticGzip = require("express-static-gzip");
-const EnviromentUtils = require('./utils/EnviromentUtils')
+const Enviroment = require('./models/Enviroment')
+const express = require('express')
+const Path = require('./utils/Path')
 
-const ROOT = path.join(__dirname, '..');
+class Server {
 
-/* SETTING ENV VARIABLES */
-const dotenvCommon = require('dotenv').config({path: path.join(ROOT, '.env.common')});
-if (!EnviromentUtils.compare('NODE_ENV', 'production')) {
-    const dotenvDev = require('dotenv').config({path: path.join(ROOT, '.env.dev')});
-}
-/* ===================== */
-
-const buildPath = path.join(__dirname, '..', 'build');
-const imagesPath = path.join(buildPath, 'images');
-const jsPath = path.join(buildPath, 'js');
-const publicPath = path.join(buildPath, 'public');
-const distPath = path.join(buildPath, 'dist');
-const robotsTxt = path.join(buildPath, 'robots.txt')
-const port = process.env.PORT || 8080;
-
-
-
-if (fs.existsSync(buildPath)) {
-
-    const db = require("./database.js")
-
-    app.use(requestIp.mw())
-    
-    if (process.env.NODE_ENV !== 'production') {
-        app.use(cors());
+    constructor({ port = Enviroment.getPort() } = {}) {
+        const app = express()
+        this.app = app
+        this.port = port
     }
-    
-    app.use(express.json());
 
-    app.use('/images', expressStaticGzip(imagesPath));
-    app.use('/js', expressStaticGzip(jsPath));
-    app.use('/public', expressStaticGzip(publicPath));
-    app.use('/dist', expressStaticGzip(distPath));
-    app.use('/robots.txt', express.static(robotsTxt));
+    async initialize(callback) {
+        const { default: fs } = await import('fs')
 
-    const { logReqMiddleware, notFundMiddelware, serverErrorMiddelware } = require('./utils/RequestUtils')
+        if (!fs.existsSync(Path.BUILD_PATH)) return await this.showError()
 
-    app.use(logReqMiddleware)
-    
-    require('./routes')(app, buildPath);
+        this.app.use(express.json())
+        this.app.set('views', Path.VIEWS_FOLDER_PATH);
+        this.app.set('view engine', 'ejs');
+        this.app.listen(this.getPort(), this.listen)
 
-    app.use(notFundMiddelware);
+        callback?.bind(this)();
+    }
 
-    app.use(serverErrorMiddelware);
+    listen = async () => {
+        const { default: chalk } = await import('chalk')
 
-    app.listen(port, () => {
-        console.log(chalk.magenta('₪ '), chalk.blue('Runing app in'), chalk.yellow(process.env.NODE_ENV), chalk.blue('mode'));
-        console.log(chalk.magenta('₪ '), chalk.green('Server is up!'));
-        let link = 'http://localhost:' + port;
-        console.log(chalk.magenta('₪ '), chalk.green('Enter to ' + link));
+        const icon = chalk.magenta('₪ ')
+        
+        console.log(`${icon} ${chalk.blue`Runing app in`} ${chalk.yellow`${process.env.NODE_ENV}`} ${chalk.blue`mode`}`)
+        console.log(`${icon} ${chalk.green`Server is up!`}`);
+        console.log(`${icon} ${chalk.cyan`Enter to ${this.getFullLink()}`}`);
         console.log('');
+
         if(process.argv.slice(2)[0] === '--open') {
-            open(link);
+            const { default: open } = await import('open');
+            open(this.getFullLink());
         }
-    });
-} else {
-    // colors reference:  https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color
-    console.log(chalk.magenta('₪ '), buildPath, chalk.red('directory not exists'))
-    console.log(chalk.magenta('₪ '), 'Please run', chalk.green('npm run build'), 'to solve this.')
+    }
+
+    use(middleware) {
+        this.app.use(middleware)
+    }
+
+    routes(Routes) {
+        new Routes(this.app)
+    }
+
+    getPort() {
+        return this.port
+    }
+
+    getFullLink() {
+        if (Enviroment.isDev()) return 'http://localhost:' + this.getPort()
+        return 'https://martin-amengual.herokuapp.com:' + this.getPort()
+    }
+
+    showError = async () => {
+        const { default: chalk } = await import('chalk')
+
+        const icon = chalk.magenta('₪ ')
+
+        console.log(`${icon} ${Path.BUILD_PATH} ${chalk.red`directory not exists`}`)
+        console.log(`${icon} Please run ${chalk.green`npm run build`} to solve this.`)
+    }
+
 }
+
+exports.Server = Server

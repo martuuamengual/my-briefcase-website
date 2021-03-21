@@ -140,7 +140,7 @@ export default class FormContact extends Component {
         formData.append('name', values.name);
         formData.append('email', values.email);
         formData.append('message', values.message);
-        fetch(UrlUtils.getCurrentUrl() + '/api/send-message', {
+        fetch(UrlUtils.getCurrentUrl() + '/api/contact/send-message', {
             method: 'POST',
             cache: 'no-cache',
             body: formData
