@@ -2,6 +2,23 @@ const chalk = require('chalk');
 
 
 class Request {
+
+    static get STATUS_DENIED() {
+        return 'denied'
+    }
+
+    static get STATUS_ALLOWED() {
+        return 'allowed'
+    }
+
+    static get STATUS_OK() {
+        return 'ok'
+    }
+
+    static get STATUS_ERROR() {
+        return 'error'
+    }
+
     static LogReqMw(req, res, next) {
         // folowing this parameters: https://es.wikipedia.org/wiki/Common_Log_Format
         res.on('finish', async () => {

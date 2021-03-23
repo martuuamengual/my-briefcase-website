@@ -16,20 +16,23 @@ class Mail {
 
     static promise() {
         return new Promise(function (resolve, rejt) {
-            resolve();
+            resolve({});
         });
     }
 
-    static sendContactMessage(body) {
-        if (!Mail.haveToSendEmail()) return Mail.promise()
-
+    static async sendContactMessage(body) {
         let name = body.name;
         let email = body.email;
         let message = body.message;
 
         let text = `name: ${name} \n email: ${email} \n message: ${message}`
 
-        return mg.messages.create(Enviroment.getValue('DOMAIN'), {
+        if (!Mail.haveToSendEmail()) {
+            console.log('Email to send:', text)
+            return Mail.promise()
+        }
+
+        return await mg.messages.create(Enviroment.getValue('DOMAIN'), {
             from: "CONTACT-CV <info@martuu.amengual.com>",
             to: ["martuu.amengual@gmail.com"],
             subject: "You recive a contact from website cv",
@@ -37,12 +40,15 @@ class Mail {
         })
     }
 
-    static sendCalificationMessage(stars) {
-        if (!Mail.haveToSendEmail()) return Mail.promise()
-
+    static async sendCalificationMessage(stars) {
         let text = `A user gives you ${stars} STARS`;
 
-        return mg.messages.create(Enviroment.getValue('DOMAIN'), {
+        if (!Mail.haveToSendEmail()) {
+            console.log('Email to send:', text)
+            return Mail.promise()
+        }
+
+        return await mg.messages.create(Enviroment.getValue('DOMAIN'), {
             from: "CALIFICATION-CV <info@martuu.amengual.com>",
             to: ["martuu.amengual@gmail.com"],
             subject: "You recive a calification from website cv",

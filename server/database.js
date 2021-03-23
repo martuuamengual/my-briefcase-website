@@ -1,4 +1,4 @@
-var sqlite3 = require('sqlite3').verbose()
+const better_sqlite = require('better-sqlite3')
 
 class Database {
 
@@ -8,38 +8,47 @@ class Database {
         return 'db.sqlite'
     }
 
-    async #createDb() {
-        return await new Promise((resolve, reject) => {
-            const db = new sqlite3.Database(this.#DB_SOURCE, async (err) => {
-                if (err) {
-                  // Cannot open database
-                  console.error(err.message)
-                  throw err
-                } else {
-                    console.log('Connected to the SQLite database.')
-                    await db.run(`CREATE TABLE Contact (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        ip text UNIQUE
-                        )`, (err) => {});
-                    await db.run(`CREATE TABLE Calification (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        ip text UNIQUE
-                        )`, (err) => {});
-                    resolve(db)
-                }
-            });
-        })
+    run(query, ...values) {
+        return new Promise(async (resolve, rejt) => {
+            try {
+                const stmt = await this.#database.prepare(query)
+                const data = await stmt.run(...values)
+                resolve(data)
+            } catch(e) {
+                rejt(e)
+            }
+        });
+    }
+
+    get(query, ...values) {
+        return new Promise(async (resolve, rejt) => {
+            try {
+                const stmt = await this.#database.prepare(query)
+                const data = await stmt.get(...values)
+                resolve(data)
+            } catch(e) {
+                rejt(e)
+            }
+        });
     }
 
     async initialize(callback) {
-        const db = await this.#createDb()
+        const db = await new better_sqlite(this.#DB_SOURCE)
         this.#database = db
+        
+        await this.run(`CREATE TABLE Contact (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            ip text UNIQUE
+            )`).catch((err) => {})
+        
+        await this.run(`CREATE TABLE Calification (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            ip text UNIQUE
+            )`).catch((err) => {})
 
+        console.log('Connected to the SQLite database.')
+        
         callback?.bind(this)()
-    }
-
-    get() {
-        return this.#database
     }
 }
 

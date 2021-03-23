@@ -31,6 +31,7 @@ export default class Calification extends Component {
     }
 
     componentDidMount() {
+        console.log(UrlUtils.getCurrentUrl())
         fetch(UrlUtils.getCurrentUrl() + '/api/calification/check', {
             method: 'POST',
             cache: 'no-cache'

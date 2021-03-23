@@ -46,7 +46,7 @@ class Routes {
     
         this.app.post('/api/calification/check', CalificationController.Check);
     
-        this.app.put('/api/calification/set', CalificationController.Set);
+        this.app.put('/api/calification/set', express.json(), CalificationController.Set);
     }
 }
 

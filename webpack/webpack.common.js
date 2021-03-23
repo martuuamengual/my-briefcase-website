@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'production') {
     const dotenvProd = Dotenv.config({path: path.join(ROOT, '.env.prod')});
     env = WebPackHelper.merge(dotenvProd.parsed, process.env);
 } else {
-    env = Dotenv.config({path: path.join(ROOT, '.env.dev')});
+    env = Dotenv.config({path: path.join(ROOT, '.env.dev')}).parsed;
 }
 
 const mergedEnv = WebPackHelper.merge(dotenvCommon.parsed, env);
