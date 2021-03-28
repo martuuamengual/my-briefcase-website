@@ -1,6 +1,10 @@
 const Enviroment = require('./models/Enviroment')
 const express = require('express')
 const Path = require('./utils/Path')
+const requestIp = require('request-ip');
+const cors = require('cors');
+const Request = require('./models/Request')
+const Routes = require('./routes')
 
 class Server {
 
@@ -15,9 +19,6 @@ class Server {
 
         if (!fs.existsSync(Path.BUILD_PATH)) return await this.showError()
 
-        this.app.use(express.json())
-        this.app.set('views', Path.VIEWS_FOLDER_PATH);
-        this.app.set('view engine', 'ejs');
         this.app.listen(this.getPort(), this.listen)
 
         callback?.bind(this)();
@@ -63,6 +64,19 @@ class Server {
 
         console.log(`${icon} ${Path.BUILD_PATH} ${chalk.red`directory not exists`}`)
         console.log(`${icon} Please run ${chalk.green`npm run build`} to solve this.`)
+    }
+
+    setUseStatement() {
+        this.app.use(requestIp.mw())
+        if (Enviroment.isDev()) this.app.use(cors())
+        this.app.use(Request.LogReqMw)
+        this.routes(Routes)
+        this.app.use(Request.NotFoundMw);
+        this.app.use(Request.ErrorMw);
+
+        this.app.use(express.json())
+        this.app.set('views', Path.VIEWS_FOLDER_PATH);
+        this.app.set('view engine', 'ejs');
     }
 
 }

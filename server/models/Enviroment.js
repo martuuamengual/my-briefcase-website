@@ -5,6 +5,10 @@ class Enviroment {
         return process.env[key];
     }
 
+    static getValueInteger(key) {
+        return parseInt(this.getValue(key), 10)
+    }
+
     static getBoolean(key) {
         let strBool = process.env[key];
         return (strBool === 'true');
@@ -37,7 +41,7 @@ class Enviroment {
     }
 
     static getPort() {
-        return this.getValue('PORT') || 8080
+        return this.getValueInteger('PORT') || 8080
     }
 
     static initialize() {

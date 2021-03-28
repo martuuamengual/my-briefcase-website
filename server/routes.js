@@ -35,18 +35,37 @@ class Routes {
     }
 
     api() {
+
         this.app.post(
             '/api/contact/send-message', 
             upload.none(),
-            body('name').isString().trim().escape(),
-            body('email').isEmail().normalizeEmail(),
-            body('message').isString().trim().escape(), ContactController.SendMessage);
+            ...Routes.api_getMw_Contact_sendMessage(), ContactController.SendMessage);
 
         this.app.post('/api/contact/check', ContactController.Check);
     
         this.app.post('/api/calification/check', CalificationController.Check);
     
         this.app.put('/api/calification/set', express.json(), CalificationController.Set);
+
+        this.app.post('/test/500', (req, res) => {
+            throw new Error('Testing 500 error server')
+        })
+    }
+
+    static escapeError(value, { req }) {
+        if (value?.includes('<') || value?.includes('>') 
+        || value?.includes('&') || value?.includes("'") 
+        || value?.includes('"') || value?.includes('/')) throw new Error('An html object was inserted')
+        return true
+    }
+
+    static api_getMw_Contact_sendMessage() {
+
+        return [
+            body('name').isString().trim().custom(this.escapeError).notEmpty(),
+            body('email').isEmail().normalizeEmail(),
+            body('message').isString().trim().custom(this.escapeError).notEmpty()
+        ]
     }
 }
 
