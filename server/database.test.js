@@ -33,7 +33,7 @@ describe('server', () => {
     })
 
     test('erease all', async () => {
-        await Utils.dropTable('Contact')
-        await Utils.dropTable('Calification')
+        await Utils.deleteRowsTable('Contact')
+        await Utils.deleteRowsTable('Calification')
     })
 })

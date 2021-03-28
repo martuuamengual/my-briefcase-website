@@ -1,4 +1,5 @@
 const Calification = require('./Calification')
+const Enviroment = require('./Enviroment')
 const Request = require('./Request')
 const Database = require('../database')
 const Utils = require('../test.utils/Utils')
@@ -6,6 +7,7 @@ const Utils = require('../test.utils/Utils')
 
 describe('models', () => {
 
+    Enviroment.initialize()
     Database.initialize()
 
     const clientIp = '127.0.0.1'
@@ -16,6 +18,8 @@ describe('models', () => {
     })
 
     test('testing client calificate CV', async () => {
+        await Utils.deleteRowsTable('Calification')
+
         const stars = 5
         const response = await new Calification().set(clientIp, stars)
         expect(response).toBe(Request.STATUS_OK)
@@ -27,6 +31,8 @@ describe('models', () => {
     })
 
     test('testing calification extreme values', async () => {
+        await Utils.deleteRowsTable('Calification')
+        
         let stars = '5'
         let response = await new Calification().set(clientIp, stars)
         expect(response).toBe(Request.STATUS_ERROR)

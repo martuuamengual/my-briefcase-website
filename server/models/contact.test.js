@@ -1,4 +1,5 @@
 const Contact = require('./Contact')
+const Enviroment = require('./Enviroment')
 const Request = require('./Request')
 const Database = require('../database')
 const Utils = require('../test.utils/Utils')
@@ -8,6 +9,7 @@ const { Req } = require('../test.utils/Req')
 
 describe('models', () => {
 
+    Enviroment.initialize()
     Database.initialize()
     const clientIp = '127.0.1.1'
 
@@ -19,6 +21,8 @@ describe('models', () => {
     test('testing client send contact message', async () => {
 
         const sendAndCheck = async (req) => {
+            await Utils.deleteRowsTable('Contact')
+
             const response = await new Contact().sendMessage(req.get())
             expect(response).toBe(Request.STATUS_OK)
 

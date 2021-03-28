@@ -69,12 +69,12 @@ class Server {
     setUseStatement() {
         this.app.use(requestIp.mw())
         if (Enviroment.isDev()) this.app.use(cors())
+        this.app.use(express.json())
         this.app.use(Request.LogReqMw)
         this.routes(Routes)
         this.app.use(Request.NotFoundMw);
         this.app.use(Request.ErrorMw);
 
-        this.app.use(express.json())
         this.app.set('views', Path.VIEWS_FOLDER_PATH);
         this.app.set('view engine', 'ejs');
     }

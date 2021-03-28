@@ -1,11 +1,13 @@
-const Request = require('./Request')
-const UndefinedUtils = require('../utils/UndefinedUtils')
+
 
 class Contact {
 
     async check(clientIp) {
-        const Database = await require("../database")
+        const Request = await require('./Request')
+        const UndefinedUtils = await require('../utils/UndefinedUtils')
+        if (UndefinedUtils.isUndefined(clientIp)) return Request.STATUS_DENIED
 
+        const Database = await require("../database")
         const sql = "select ip from Contact where ip=?"
         const client = await Database.get(sql, clientIp).catch((err) => {})
 
@@ -15,10 +17,12 @@ class Contact {
 
     async sendMessage(req) {
         const { validationResult } = await require('express-validator')
-
+        const Request = await require('./Request')
+        
         const errors = validationResult(req)
         if (!errors.isEmpty()) return Request.STATUS_ERROR
-            
+        
+        const UndefinedUtils = await require('../utils/UndefinedUtils')
         const Mail = await require('../models/Mail')
         const emailSent = await Mail.sendContactMessage(req.body).catch((err) => {})
         if (UndefinedUtils.isUndefined(emailSent)) return Request.STATUS_ERROR

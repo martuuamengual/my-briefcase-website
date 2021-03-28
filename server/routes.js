@@ -1,5 +1,4 @@
 const multer  = require('multer')
-const upload = multer()
 const { body } = require('express-validator');
 const expressStaticGzip = require("express-static-gzip");
 const express = require('express')
@@ -38,14 +37,13 @@ class Routes {
 
         this.app.post(
             '/api/contact/send-message', 
-            upload.none(),
             ...Routes.api_getMw_Contact_sendMessage(), ContactController.SendMessage);
 
         this.app.post('/api/contact/check', ContactController.Check);
     
         this.app.post('/api/calification/check', CalificationController.Check);
     
-        this.app.put('/api/calification/set', express.json(), CalificationController.Set);
+        this.app.put('/api/calification/set', CalificationController.Set);
 
         this.app.post('/test/500', (req, res) => {
             throw new Error('Testing 500 error server')
